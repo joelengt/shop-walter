@@ -3,12 +3,18 @@
 <head>
     @inject('configuraciones', 'App\Modelos\Configuraciones')
     <?php
-        $config = [];
-        $configuraciones = $configuraciones->get();
-        foreach ($configuraciones as $configuracion){
-            $config[$configuracion->llave] = $configuracion->valor;
-        }
-        //dd(asset('/'));
+//      $config = [];
+        $config = [
+            'head_title' => 'Tienda Walter',
+            'head_description' => 'Una Tienda para toda la familia',
+            'head_keywords' => 'a, b, c, d',
+            'url_facebook' => 'https://facebook.com'
+        ];
+//        $configuraciones = $configuraciones->get();
+//        foreach ($configuraciones as $configuracion){
+//            $config[$configuracion->llave] = $configuracion->valor;
+//        }
+//        dd($config);
     ?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,7 +79,7 @@
     }
 
     body {
-        font-family: Exo2RegularCondensed
+        font-family: Exo2RegularCondensed;
     }
 
 
@@ -362,7 +368,7 @@
         left: 90%;
         width: 30px;
         height: 30px;
-        background-color: rgba(0, 0, 0);
+        background-color: #000;
         text-align: center;
         color: white;
         display: none;
