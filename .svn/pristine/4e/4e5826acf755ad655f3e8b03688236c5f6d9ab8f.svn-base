@@ -1,0 +1,89 @@
+<?php $__env->startSection('contenido'); ?>
+    <style>
+        .pagination {
+            margin: 5px 0;
+        }
+    </style>
+
+    <script>
+        function AgregarUsuarios()
+        {
+            location.href = "<?php echo e(route('agregar-usuarios-admin')); ?>"
+        }
+
+        function EditarUsuarios(codigo)
+        {
+            location.href = "<?php echo e(route('editar-usuarios-admin',['id_usuario'=>''])); ?>/" + codigo;
+        }
+    </script>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border bg-light-blue">
+                    <h3 class="box-title">Usuarios registrados</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row" style="margin: 1px;font-size: 11px;">
+                            <div class="col-sm-12 table-responsive">
+                                <table id="example2" class="table table-bordered table-hover table-condensed table-striped" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                    <tr role="row" class="bg-light-blue">
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=""></th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Codigo</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Nombre usuario</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Password</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Perfil</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Habilitado</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($usuarios as $usuario): ?>
+                                        <tr role="row" class="odd">
+                                            <td><i class="fa fa-edit" title="Editar Registro" onclick="EditarUsuarios(<?php echo e($usuario->id_usuario); ?>)"></i> <i class="fa fa-plus" title="Nuevo Registro" onclick="AgregarUsuarios()"></i></td>
+
+                                            <td><?php echo e($usuario->id_usuario); ?></td>
+                                            <td><?php echo e($usuario->username); ?></td>
+                                            <td><?php echo e($usuario->password); ?></td>
+                                            <td>Administrador</td>
+                                            <td><?php echo e($usuario->habilitado?'Si':'No'); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row input-group-sm">
+                            <div class="col-sm-5" style="margin-top: 8px;">
+                                <?php /**/ $numero_registro_inicial = ($usuarios->perPage()*($usuarios->currentPage()-1))+1; /**/ ?>
+                                <?php /**/ $numero_registro_final = ($usuarios->perPage()*($usuarios->currentPage()-1))+$usuarios->perPage(); /**/ ?>
+                                <?php /**/ $numero_registro_final = $numero_registro_final>$usuarios->total()?$usuarios->total():$numero_registro_final; /**/ ?>
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Mostrando <?php echo e($numero_registro_inicial); ?> a <?php echo e($numero_registro_final); ?> de <?php echo e($usuarios->total()); ?>  registros</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate" style="float: right;">
+                                    <ul class="pagination">
+                                        <?php echo e($usuarios->links()); ?>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('privado.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

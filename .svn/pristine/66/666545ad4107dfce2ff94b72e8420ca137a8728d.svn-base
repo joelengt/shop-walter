@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use \Redirect;
+
+use App\Modelos\Categorias;
+
+class CategoriasControlador extends Controller
+{
+    public function Categorias()
+    {
+        $categorias = Categorias::with(['padre'])->paginate();
+
+        return view('privado.categorias.lista-categorias',compact(['categorias']));
+    }
+
+    public function EditarCategorias(Request $request,$id_categoria)
+    {
+        $categoria = Categorias::find($id_categoria);
+
+        if($request->method()=='GET')
+        {
+            $principales = Categorias::CategoriasPrincipales()->get();
+
+            return view('privado.categorias.editar-categoria',compact(['categoria','principales']));
+        }elseif($request->method()=='POST')
+        {
+            $datos = $request->only(['id_categoria_padre','nombre_categoria','orden','habilitado']);
+
+            $categoria->id_categoria_padre = empty($datos['id_categoria_padre'])?NULL:$datos['id_categoria_padre'];
+            $categoria->nombre_categoria = $datos['nombre_categoria'];
+            $categoria->slug = str_slug($datos['nombre_categoria']);
+            $categoria->orden = $datos['orden'];
+            $categoria->habilitado = $datos['habilitado'];
+
+            $categoria->save();
+
+            return Redirect::to('admin/categorias');
+        }
+
+    }
+
+    public function AgregarCategorias(Request $request)
+    {
+        if($request->method()=='GET')
+        {
+            $principales = Categorias::CategoriasPrincipales()->get();
+
+            return view('privado.categorias.agregar-categoria',compact(['categoria','principales']));
+        }elseif($request->method()=='POST')
+        {
+            $datos = $request->only(['id_categoria_padre','nombre_categoria','orden','habilitado']);
+
+            $categoria = new Categorias();
+
+            $categoria->id_categoria_padre = empty($datos['id_categoria_padre'])?NULL:$datos['id_categoria_padre'];
+            $categoria->nombre_categoria = $datos['nombre_categoria'];
+            $categoria->slug = str_slug($datos['nombre_categoria']);
+            $categoria->orden = $datos['orden'];
+            $categoria->habilitado = $datos['habilitado'];
+
+            $categoria->save();
+
+            return Redirect::to('admin/categorias');
+        }
+    }
+}

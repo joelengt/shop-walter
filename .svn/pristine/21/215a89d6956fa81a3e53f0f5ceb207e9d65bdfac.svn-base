@@ -1,0 +1,378 @@
+@extends('publico.plantilla-principal')
+
+@section('contenido')
+    <div class="general1">
+        <div class="container general2">
+            <div class="col-md-3 barraIzq" id="leftMenu">
+                <div class="border">
+                    <div class="title1">Categorías</div>
+                    <ul class="content categorias">
+                        <li class="">
+                            <ul>
+                                <li class="menu">
+                                    <a href="/AR/es/products/boligrafos" onclick="return prodShowSubmenu(this,'prod_menu_2');" title="Bolígrafos">
+                                        <div class="left">Bolígrafos</div><img src="" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_2">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/boligrafos/plasticos-metalicos" title="Plásticos + Metálicos">Plásticos + Metálicos</a></li>
+                                        <li><a href="/AR/es/products/boligrafos/metalicos" title="Metálicos">Metálicos</a></li>
+                                        <li><a href="/AR/es/products/boligrafos/plasticos" title="Plásticos">Plásticos</a></li>
+                                        <li><a href="/AR/es/products/boligrafos/sets" title="Sets">Sets</a></li>
+                                        <li><a href="/AR/es/products/boligrafos/estuches" title="Estuches">Estuches</a></li>
+                                        <li><a href="/AR/es/products/boligrafos/tactiles" title="Táctiles">Táctiles</a></li>
+                                        <li><a href="/AR/es/products/boligrafos" title="Bolígrafos"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/bolsos-y-mochilas" onclick="return prodShowSubmenu(this,'prod_menu_5');" title="Bolsos Y Mochilas">
+                                        <div class="left">Bolsos Y Mochilas</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_5">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/bolsos-y-mochilas/mochilas" title="Mochilas">Mochilas</a></li>
+                                        <li><a href="/AR/es/products/bolsos-y-mochilas/maletines" title="Maletines">Maletines</a></li>
+                                        <li><a href="/AR/es/products/bolsos-y-mochilas/bolsos" title="Bolsos ">Bolsos </a></li>
+                                        <li><a href="/AR/es/products/bolsos-y-mochilas/valijas-carry-on" title="Valijas &amp; Carry-On">Valijas &amp; Carry-On</a></li>
+                                        <li><a href="/AR/es/products/bolsos-y-mochilas" title="Bolsos Y Mochilas"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/hogar-tiempo-libre" onclick="return prodShowSubmenu(this,'prod_menu_10');" title="Hogar &amp; Tiempo Libre">
+                                        <div class="left">Hogar &amp; Tiempo Libre</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_10">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/hogar-tiempo-libre/hogar" title="Hogar">Hogar</a></li>
+                                        <li><a href="/AR/es/products/hogar-tiempo-libre/vinos" title="Vinos">Vinos</a></li>
+                                        <li><a href="/AR/es/products/hogar-tiempo-libre/herramientas" title="Herramientas">Herramientas</a></li>
+                                        <li><a href="/AR/es/products/hogar-tiempo-libre/tiempo-libre" title="Tiempo Libre">Tiempo Libre</a></li>
+                                        <li><a href="/AR/es/products/hogar-tiempo-libre" title="Hogar &amp; Tiempo Libre"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/tecnologia" onclick="return prodShowSubmenu(this,'prod_menu_8');" class="selected" title="Tecnología">
+                                        <div class="left">Tecnología</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu" id="prod_menu_8">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/tecnologia/otros" title="Otros">Otros</a></li>
+                                        <li><a href="/AR/es/products/tecnologia/computacion" class="selected" title="Computación">Computación</a></li>
+                                        <li><a href="/AR/es/products/tecnologia" title="Tecnología"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/escritorio" onclick="return prodShowSubmenu(this,'prod_menu_12');" title="Escritorio">
+                                        <div class="left">Escritorio</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_12">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/escritorio/portfolios" title="Portfolios">Portfolios</a></li>
+                                        <li><a href="/AR/es/products/escritorio/libreria" title="Librería">Librería</a></li>
+                                        <li><a href="/AR/es/products/escritorio/accesorios" title="Accesorios">Accesorios</a></li>
+                                        <li><a href="/AR/es/products/escritorio" title="Escritorio"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/gorros" onclick="return prodShowSubmenu(this,'prod_menu_3');" title="Gorros">
+                                        <div class="left">Gorros</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_3">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/gorros/gorras" title="Gorras">Gorras</a></li>
+                                        <li><a href="/AR/es/products/gorros/chambergo" title="Chambergo">Chambergo</a></li>
+                                        <li><a href="/AR/es/products/gorros" title="Gorros"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/termicos" onclick="return prodShowSubmenu(this,'prod_menu_9');" title="Térmicos">
+                                        <div class="left">Térmicos</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_9">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/termicos/jarros" title="Jarros">Jarros</a></li>
+                                        <li><a href="/AR/es/products/termicos/coolers-2" title="Coolers">Coolers</a></li>
+                                        <li><a href="/AR/es/products/termicos/termos" title="Termos">Termos</a></li>
+                                        <li><a href="/AR/es/products/termicos" title="Térmicos"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/llaveros" onclick="return prodShowSubmenu(this,'prod_menu_7');" title="Llaveros">
+                                        <div class="left">Llaveros</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_7">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/llaveros/todos" title="Todos">Todos</a></li>
+                                        <li><a href="/AR/es/products/llaveros" title="Llaveros"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+                                    <a href="/AR/es/products/paraguas" onclick="return prodShowSubmenu(this,'prod_menu_4');" title="Paraguas">
+                                        <div class="left">Paraguas</div><img src="{{ asset('/img/leftMenu_subBtn2.png') }}" border="0">		            </a>
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_4">
+                                    <ul class="next_level">
+                                        <li><a href="/AR/es/products/paraguas/clasico" title="Clásico">Clásico</a></li>
+                                        <li><a href="/AR/es/products/paraguas/todos-2" title="Todos">Todos</a></li>
+                                        <li><a href="/AR/es/products/paraguas" title="Paraguas"><em>+ Ver todo</em></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 ficha">
+
+                <!-- RUTA ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                <div class="col-md-12 ruta">
+                    <a href="/AR/es/products">Productos</a> &gt;
+                    <a href="/AR/es/products/tecnologia">Tecnología</a> &gt;
+                    <a href="/AR/es/products/tecnologia/computacion">Computación</a>            </div>
+                <!-- RUTA ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+                <div class="col-md-12 contenido">
+                    <!-- IMAGENES -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="fotorama col-md-6" data-arrows="always" data-allowfullscreen="native" data-autoplay="true" data-click="true" data-swipe="false" data-nav="thumbs">
+                        <img src="{{ asset('/img/products/5be27c619f83daaad045d7b589172aa898bd170b.jpg') }}" title="Pendrive Slim (usb / micro usb)" alt="Pendrive Slim (usb / micro usb)">
+                        <img src="{{ asset('/img/products/2f07234047a2e7691549b5540c959cc45ec4b198.jpg') }}" title="Pendrive Slim (usb / micro usb)" alt="Pendrive Slim (usb / micro usb)">
+                        <img src="{{ asset('/img/products/ddb922d3cdd42e0fb8f29c2d8869bb6e45e6fff8.jpg') }}" title="Pendrive Slim (usb / micro usb)" alt="Pendrive Slim (usb / micro usb)">
+                    </div>
+                    <!-- IMAGENES -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!-- DESCRIPCION ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="col-md-6 datos">
+                        <h1>Pendrive Slim (usb / micro usb)</h1>
+                        <div class="novedadProd">
+                            <a href="/AR/es/novelties">NOVEDAD</a>
+                        </div>
+                        <p></p><p>Pendrive metálico, diseño compacto. Salidas USB y Micro USB.</p>
+                        <p>Compatibilidad conexión OTG.</p>
+                        <p><strong>Capacidad:</strong> 8 GB. / 16 GB.</p>
+                        <p><strong>Medidas:</strong> 3,5 x 1,2 x 0,4 cm. Peso: 28 Gr.</p><p></p>
+
+                        <div class="iconos">
+                            <img src="{{ asset('/img/products/7a981f2f7b6302afacbb9cf6a0863cd2c0c72599.jpg') }}" alt="USB" title="USB">
+                            <img src="{{ asset('/img/products/fc7dc3d3382b73f418be5aea8251723f8a2047a3.jpg') }}" alt="MINI USB" title="MINI USB">
+                            <img src="{{ asset('/img/products/aca10af6994262ab7198bc84e709a14e2f256fb5.png') }}" alt="ANDRIOD" title="ANDRIOD">
+                        </div>
+
+
+                        <div class="impresion_div">
+                            <a href="javascript:showPopup('areaImprimible')">Ver área de impresión</a>
+                        </div>
+
+                        <p>Colores disponibles: </p>
+                        <ul class="color_picker" id="color_picker">
+                            <li>
+                                <a style="background: #ff3d3d; border:2px solid #ff3d3d;" title="Rojo"></a>
+                            </li>
+                            <li>
+                                <a style="background: #0000ff; border:2px solid #0000ff;" title="Azul Francia"></a>
+                            </li>
+                            <li>
+                                <a style="background: #b1aaaa; border:2px solid #b1aaaa;" title="Gris"></a>
+                            </li>
+                            <div class="clear"></div>
+                        </ul>
+
+                        <form class="add" id="add_to_quotation_form" action="/AR/es/user_quotations/add_item" method="post">
+                            <input type="hidden" name="item_id" value="473">
+
+                            <div class="form-group col-md-6">
+                                <label for="order_quantity">Cantidad</label>
+                                <input name="order_quantity" id="order_quantity" min_error="Hay un mínimo de 40 unidades" rel="40" value="40" size="4" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="order_colors">Color</label>
+                                <select name="order_colors" id="order_colors" class="form-control">
+                                    <option value="2">Rojo</option>
+                                    <option value="8">Azul Francia</option>
+                                    <option value="13">Gris</option>
+                                </select>
+                            </div>
+
+                            <div style="display:inline-block;">
+                                <button id="add_to_quotation_button">Pedir cotización</button>
+
+
+
+                                <a id="favorites_btn" class="aFav add" href="/es/login" rel="" title="Agregar a favoritos">
+                                </a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- DESCRIPCION ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <span><a name="fb_share" type="button_count">Compartir en FB</a> </span>
+                    <div><span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1469820565243_0"><a id="li_ui_li_gen_1469820565243_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1469820565243_0-logo">in</span><span id="li_ui_li_gen_1469820565243_0-title"><span id="li_ui_li_gen_1469820565243_0-mark"></span><span id="li_ui_li_gen_1469820565243_0-title-text">Compartir</span></span></a></span></span><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1469820565256_1-container" class="IN-right IN-hidden"><span id="li_ui_li_gen_1469820565256_1" class="IN-right"><span id="li_ui_li_gen_1469820565256_1-inner" class="IN-right"><span id="li_ui_li_gen_1469820565256_1-content" class="IN-right">0</span></span></span></span></span></span><script type="IN/Share+init" data-counter="right"></script></div>
+                </div>
+
+                <!-- INFO EXTENDIDA -------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <div class="popup popups" id="photosModal" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tbody><tr class="top">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="middle">
+                            <td class="left"></td>
+                            <td class="center">
+                                <div class="popup_content">
+                                    <div class="left">
+                                        <h1>Pendrive Slim (usb / micro usb)</h1>
+                                    </div>
+                                    <a class="close_simple_btn_big right" href="javascript:closePopup('photosModal')"></a>
+                                    <div class="clear"></div>
+                                    <div id="pop_up_main_image" class="left product">
+                                        <img class="img-responsive" src="{{ asset('/img/products/5be27c619f83daaad045d7b589172aa898bd170b.jpg') }}" border="0" alt="Pendrive Slim (usb / micro usb)">
+                                    </div>
+                                    <div class="left info">
+                                        <h5>Imágenes del Producto</h5>
+                                        <ul id="image_thumbs" class="thumbs">
+                                            <li><a href="#" title="Pendrive Slim (usb / micro usb)"><img src="{{ asset('/img/products/5be27c619f83daaad045d7b589172aa898bd170b.jpg') }}" height="100" border="0" alt="Pendrive Slim (usb / micro usb)"></a></li>
+                                            <li><a href="#" title="Pendrive Slim (usb / micro usb)"><img src="{{ asset('/img/products/2f07234047a2e7691549b5540c959cc45ec4b198.jpg') }}" height="100" border="0" alt="Pendrive Slim (usb / micro usb)"></a></li>
+                                            <li><a href="#" title="Pendrive Slim (usb / micro usb)"><img src="{{ asset('/img/products/ddb922d3cdd42e0fb8f29c2d8869bb6e45e6fff8.jpg') }}" height="100" border="0" alt="Pendrive Slim (usb / micro usb)"></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="bottom">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        </tbody></table>
+                </div>
+
+
+                <div class="popup popups" id="areaImprimible" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tbody><tr class="top">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="middle">
+                            <td class="left"></td>
+                            <td class="center">
+                                <div class="popup_content">
+                                    <div class="left">
+                                        <h1>Área de impresión</h1>
+                                    </div>
+                                    <a class="close_simple_btn_big right" href="javascript:closePopup('areaImprimible')"></a>
+                                    <div class="clear"></div>
+                                    <div class="left product"><img src="{{ asset('/img/products/2f593f223d85a61b4c8c834b374538eb707b2719.jpg') }}"></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="bottom">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        </tbody></table>
+                </div>
+
+                <!-- INFO EXTENDIDA -------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <!-- Formulario de Contacto -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <div class="col-md-12 contenido">
+                    <h3 class="left">Formulario de Consultas</h3>
+                    <div class="destacados">
+                        <form class="gen_form form-horizontal" action="#" method="post" id="form_contacto">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Nombre<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[first_name]" class="form-control" id="productos_first_name">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Apellido<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[last_name]" class="form-control" id="productos_last_name">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Email<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[email]" class="form-control" id="productos_email">                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Teléfono</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[contact_phone]" class="form-control" id="productos_contact_phone">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Producto</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[product_name]" value="Pendrive Slim (usb / micro usb)" class="form-control" readonly="1" id="productos_product_name">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Consulta</label>
+                                    <div class="col-sm-8">
+                                        <textarea rows="4" cols="30" name="productos[message]" class="form-control" id="productos_message"></textarea>                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group align">
+                                    <button type="submit" onclick="contacto();" class="enviarConsulta">Enviar</button>
+                                </div>
+                                <input type="hidden" name="productos[_csrf_token]" value="b35d7c07dcd9006a6cc3fc1c981e316d" id="productos__csrf_token">                        </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Formulario de Contacto -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <!-- PRODUCTO RELACIONADO -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <div class="col-md-12 contenido">
+                    <h3 class="left">Productos relacionados</h3>
+                    <div class="destacados">
+                        <div class="destacado">
+                            <a href="/AR/es/products/tecnologia/computacion/boligrafo-pendrive-nakar-kingtech" title="Bolígrafo Pendrive Nakar - Kingtech">
+                                <div class="img"><img src="{{ asset('/img/products/Bol-Pen-Drive-Nakar-3.jpg') }}" alt="Bolígrafo Pendrive Nakar - Kingtech" class="img-responsive"></div>
+                                <div class="title">Bolígrafo Pend...</div>
+                            </a>
+                        </div>
+                        <div class="destacado">
+                            <a href="/AR/es/products/boligrafos/plasticos/new-galaxy" title="New Galaxy">
+                                <div class="img"><img src="{{ asset('/img/products/533e55898712ce64cc88d1a04646141ecc6fcde1.jpg') }}" alt="New Galaxy" class="img-responsive"></div>
+                                <div class="title">New Galaxy</div>
+                            </a>
+                        </div>
+                        <div class="destacado">
+                            <a href="/AR/es/products/paraguas/todos-2/paraguas-street-pg-006" title="Paraguas Street - PG 006">
+                                <div class="img"><img src="{{ asset('/img/products/eb8c1073287551aa26c0de3bfe6fd0bed5a06543.jpg') }}" alt="Paraguas Street - PG 006" class="img-responsive"></div>
+                                <div class="title">Paraguas Street...</div>
+                            </a>
+                        </div>
+                        <div class="destacado">
+                            <a href="/AR/es/products/escritorio/libreria/porta-notas-adhesivas" title="Porta Notas Adhesivas">
+                                <div class="img"><img src="{{ asset('/img/products/2674036bd19c925d497e770d2f4c6b77734a9dce.jpg') }}" alt="Porta Notas Adhesivas" class="img-responsive"></div>
+                                <div class="title">Porta Notas Adh...</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- PRODUCTO RELACIONADO -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <!-- PRODUCTO PRECIO SIMILAR ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <!-- PRODUCTO PRECIO SIMILAR ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+            </div>
+        </div>
+    </div>
+    <script>
+        
+
+    </script>
+@endsection

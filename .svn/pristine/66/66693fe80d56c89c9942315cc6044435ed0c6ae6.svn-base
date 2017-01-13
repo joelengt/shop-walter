@@ -1,0 +1,279 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Carruseles;
+use App\Modelos\Categorias;
+use App\Modelos\Colores;
+use App\Modelos\Especificaciones;
+use App\Modelos\Productos;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use \DB;
+use \Redirect;
+use \Auth;
+use \Mail;
+use \URL;
+
+class ProductosControlador extends Controller
+{
+    /**
+     * Carga el reporte de los productos registrados.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function Productos()
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else{
+            $productos = Productos::with(['categorias','imagenes','especificaciones','colores'])->paginate();
+
+            return view('privado.productos.lista-productos',compact(['productos']));
+        }
+    }
+
+    public function EnviarConsultaProductos(Request $request)
+    {
+        //dd($request->path());
+        $producto = $request->only(['productos']);
+        $producto = $producto['productos'];
+        //dd($producto);
+        Mail::send('publico.correo.consulta-productos', ['producto' => $producto], function ($message) use ($producto) {
+
+            $message->from('nadla20xx@gmail.com', 'Miguel Villanueva');
+
+            $message->to($producto['email']);
+
+            $message->subject("Consulta de ".$producto['product_name']." - Pagina Web");
+        });
+
+        return Redirect::to(URL::previous());
+    }
+
+    public function BuscarProductos(Request $request)
+    {
+
+        $datos = $request->only(['query','page_size']);
+
+        $texto_buscar = $datos['query'];
+        $por_pagina = !empty($datos['page_size'])?$datos['page_size']:12;
+        $resultados_por_pagina = ['12','24','Todo'];
+
+        if(!empty($datos['query']))
+            $productos = Productos::Activos()->BuscarProductos($texto_buscar)->paginate($por_pagina);
+        else
+            $productos = Productos::Activos()->paginate($por_pagina);
+        //dd($productos);
+        return view('publico.resultado-busqueda-productos',compact(['productos','texto_buscar','resultados_por_pagina','por_pagina']));
+    }
+
+    public function BuscarQueryProductos(Request $request)
+    {
+        $datos = $request->only(['q','limit']);
+
+        $productos = Productos::Activos()->BuscarProductos($datos['q'])->paginate($datos['limit']);
+
+        $datos = [];
+
+        foreach ($productos as $producto)
+        {
+            $categorias = "";
+            foreach ($producto->categorias as $categoria)
+                $categorias .= "{$categoria->nombre_categoria},";
+
+            $categorias = trim($categorias,',');
+
+            $datos[] = ["{$producto->nombre_producto}",'<a href="'.asset($producto->GetUrlDetalleProducto()).'"><div class="prod_name">'.$producto->nombre_producto.'</div><div class="extra">'.$categorias.'.</div></a>',"{$producto->GetUrlDetalleProducto()}"];
+        }
+
+        return json_encode($datos);
+    }
+
+    /**
+     * Carga el formulario para editar un producto.
+     *
+     * @param Request $request
+     * @param integer $id_producto Codigo de producto a editar.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function EditarProducto(Request $request,$id_producto)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+
+            if ($request->method() == 'GET') {
+                $producto = Productos::find($id_producto);
+
+                $colores = Colores::all();
+                $especificaciones = Especificaciones::all();
+                $subcategorias = Categorias::NoPrincipales()->get();
+                $carruseles = Carruseles::all();
+
+                return view('privado.productos.editar-producto', compact(['producto', 'colores', 'especificaciones', 'subcategorias', 'carruseles']));
+            } elseif ($request->method() == 'POST') {
+                $datos = $request->only(['nombre_producto', 'descripcion', 'stock', 'precio', 'fecha_publicacion', 'habilitado', 'id_color', 'id_especificacion', 'id_categoria', 'id_carrusel']);
+                $usuario = Auth::user();
+
+                /* Limpiar y asignar colores */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_color']))
+                    foreach ($datos['id_color'] as $color) {
+                        $datos_insertar[] = ['id_producto' => $id_producto, 'id_color' => $color];
+                    }
+
+                DB::table('productos_colores')->where('id_producto', $id_producto)->delete();
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_colores')->insert($datos_insertar);
+
+                /* Limpiar y asignar categorias */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_categoria']))
+                    foreach ($datos['id_categoria'] as $categoria) {
+                        $datos_insertar[] = ['id_producto' => $id_producto, 'id_categoria' => $categoria];
+                    }
+
+                DB::table('productos_categorias')->where('id_producto', $id_producto)->delete();
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_categorias')->insert($datos_insertar);
+
+                /* Limpiar y asignar especificaciones */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_especificacion']))
+                    foreach ($datos['id_especificacion'] as $especificacion) {
+                        $datos_insertar[] = ['id_producto' => $id_producto, 'id_especificacion' => $especificacion];
+                    }
+
+                DB::table('productos_especificaciones')->where('id_producto', $id_producto)->delete();
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_especificaciones')->insert($datos_insertar);
+
+                /* Limpiar y asignar carruseles */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_carrusel']))
+                    foreach ($datos['id_carrusel'] as $carrusel) {
+                        $datos_insertar[] = ['id_producto' => $id_producto, 'id_carrusel' => $carrusel];
+                    }
+
+                DB::table('productos_carruseles')->where('id_producto', $id_producto)->delete();
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_carruseles')->insert($datos_insertar);
+
+                /* Actualizamos datos del producto */
+                $producto = Productos::find($id_producto);
+
+                $producto->nombre_producto = $datos['nombre_producto'];
+                $producto->descripcion = $datos['descripcion'];
+                $producto->stock = $datos['stock'];
+                $producto->precio = $datos['precio'];
+                $producto->slug = str_slug($producto->nombre_producto);
+                $producto->fecha_publicacion = $datos['fecha_publicacion'];
+
+                $producto->id_usuario_modificacion = $usuario->id_usuario;
+                $producto->fecha_modificacion = date('Y-m-d H:i:s');
+                $producto->habilitado = $datos['habilitado'];
+
+                $producto->save();
+
+                return Redirect::to('admin/productos');
+            }
+        }
+    }
+
+    /**
+     * Carga el formulario para generar un nuevo producto.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function AgregarProducto(Request $request)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+
+            if ($request->method() == 'GET') {
+                $colores = Colores::all();
+                $especificaciones = Especificaciones::all();
+                $subcategorias = Categorias::NoPrincipales()->get();
+                $carruseles = Carruseles::all();
+
+                return view('privado.productos.agregar-producto', compact(['colores', 'especificaciones', 'subcategorias', 'carruseles']));
+            }else if ($request->method() == 'POST') {
+                $producto = new Productos();
+                $usuario = Auth::user();
+
+                $datos = $request->only(['nombre_producto', 'descripcion', 'stock', 'precio', 'fecha_publicacion', 'habilitado', 'id_color', 'id_especificacion', 'id_categoria', 'id_carrusel']);
+
+                $producto->nombre_producto = $datos['nombre_producto'];
+                $producto->descripcion = $datos['descripcion'];
+                $producto->stock = $datos['stock'];
+                $producto->precio = $datos['precio'];
+                $producto->slug = str_slug($producto->nombre_producto);
+                $producto->fecha_publicacion = $datos['fecha_publicacion'];
+
+                $producto->id_usuario_creacion = $usuario->id_usuario;
+                $producto->fecha_creacion= date('Y-m-d H:i:s');
+                $producto->habilitado = $datos['habilitado'];
+
+                $producto->save();
+                //dd($producto->id_producto);
+
+                /* Inserttamos colores */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_color']))
+                    foreach ($datos['id_color'] as $color) {
+                        $datos_insertar[] = ['id_producto' => $producto->id_producto, 'id_color' => $color];
+                    }
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_colores')->insert($datos_insertar);
+
+                /* Insertamos categorias */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_categoria']))
+                    foreach ($datos['id_categoria'] as $categoria) {
+                        $datos_insertar[] = ['id_producto' => $producto->id_producto, 'id_categoria' => $categoria];
+                    }
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_categorias')->insert($datos_insertar);
+
+                /* Insertamos especificaciones */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_especificacion']))
+                    foreach ($datos['id_especificacion'] as $especificacion) {
+                        $datos_insertar[] = ['id_producto' => $producto->id_producto, 'id_especificacion' => $especificacion];
+                    }
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_especificaciones')->insert($datos_insertar);
+
+                /* Insertamos carruseles */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_carrusel']))
+                    foreach ($datos['id_carrusel'] as $carrusel) {
+                        $datos_insertar[] = ['id_producto' => $producto->id_producto, 'id_carrusel' => $carrusel];
+                    }
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_carruseles')->insert($datos_insertar);
+
+                return Redirect::to('admin/productos');
+            }
+        }
+    }
+}

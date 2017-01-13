@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+class CategoriasControlador extends Controller
+{
+    public function Categorias()
+    {
+        //dd(1234);
+        return view('privado.categorias.lista-categorias');
+    }
+}

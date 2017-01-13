@@ -1,0 +1,246 @@
+@extends('publico.plantilla-principal')
+
+@section('contenido')
+    <div class="slider">
+
+        <div class="slider-wrapper theme-default">
+            <div class="ribbon"></div>
+            <div id="slider" class="nivoSlider">
+                <a href="http://www.zecat.com/AR/es/products/computacion/tecnologia/multicharger-force-3-0-kingtech" >            <img src="img/banners/e1d02112918cf8efffc389dba215da3c8b6efb2c.png" />            </a>                    <a href="http://www.zecat.com.ar/AR/es/products/tecnologia/otros/mobile-phone-holder-kingtech" >            <img src="img/banners/37bb8a9c32021f7519e52ce060bf3935e5d19479.png" />            </a>                    <a href="http://www.zecat.com.ar/AR/es/products/tecnologia/otros/linterna-powerbank-solar" >            <img src="img/banners/1038b34e3c338d75995146a6ffef30cd013e047d.png" />            </a>                    <a href="http://www.zecat.aristei.com.ar/web/AR/es/products/bolsos-y-mochilas/bolsos/bolso-matero-pampa-spirit" >            <img src="img/banners/c33f4c6435bb71908e9d1049dcfb7c606f9ec3e9.png" />            </a>                    <a href="http://www.zecat.aristei.com.ar/web/AR/es/products/bolsos-y-mochilas/mochilas/lewis-ogio" >            <img src="img/banners/3446d24d9b93d2b9ddab63cb604d279872ee6554.png" />            </a>                    <a href="http://zecat.aristei.com.ar/web/AR/es/products/hogar-tiempo-libre/termicos/termo-lumilite-acero-inoxidable-1-2-litro-nv-115" >            <img src="img/banners/0152cd88815fe3dad91a4ed99c56fe66486b99c5.png" />            </a>                    <a href="http://www.zecat.aristei.com.ar/web/AR/es/products/bolsos-y-mochilas/valijas-carry-on/layover-ogio" >            <img src="img/banners/13629c0b8389b4c9f8a203b9a4c6187962e4269c.png" />            </a>                    <a href="http://zecat.aristei.com.ar/web/AR/es/products/tecnologia/otros/water-resistant-speaker-kingtech" >            <img src="img/banners/e5ca4655aa37a8f51fed035c3a3c6b70e954be24.png" />            </a>                    <a href="http://www.zecat.aristei.com.ar/web/AR/es/products/boligrafos/tactiles/rey-touch-screen" >            <img src="img/banners/4df593437c254c73c6d6367a62ece19a399ce007.png" />            </a>            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('#slider').nivoSlider({
+                    effect: 'random', // Specify sets like: 'fold,fade,sliceDown'
+                    animSpeed: 500, // Slide transition speed
+                    pauseTime: 3000, // How long each slide will show
+                    directionNav: true, // Next & Prev navigation
+                    controlNav: true, // 1,2,3... navigation
+                    controlNavThumbs: false, // Use thumbnails for Control Nav
+                    controlNavThumbsFromRel: false, // Use image rel for thumbs
+                    keyboardNav: false, // Use left & right arrows
+                    pauseOnHover: true, // Stop animation while hovering
+                    manualAdvance: false, // Force manual transitions
+                    captionOpacity: 0.8, // Universal caption opacity
+                    prevText: 'Prev', // Prev directionNav text
+                    nextText: 'Próx' // Next directionNav text
+                });
+            });
+        </script>
+    </div>
+
+
+    <div class="general1home">
+        <div class="container general2 home">
+
+            <table class="homeTitle">
+                <tr>
+                    <td class="homeTitle2">
+                        <div class="homeTitle2Div"><h1>Productos destacados</h1></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="destacados">
+                <div class="bxslider">
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Bolígrafo frosted con sistema twist.
+Puntera para dispositivos táctiles. ">
+                            <a href="/AR/es/products/boligrafos/tactiles/rey-touch-screen"
+                               title="Bolígrafo frosted con sistema twist.
+Puntera para dispositivos táctiles. ">
+                                <img src="img/products/3b6395b8a865c0ef97d21400f6b56fb0f2748e87.png" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Cargador para dispositivos móviles. Sistema adaptador con cable USB a Mini USB / Micro USB / IPhone / Nokia DC 2.0. Linterna Led. Potencia: 6600 Mah, rinde hasta 3 cargas dependiendo del dispositivo. Incluye estuche protector.
+Potencia: 6600 Mah
+Medidas: 13 x 8,5 x 3,6 cm
+Peso: 0,24 kg">
+                            <a href="/AR/es/products/tecnologia/otros/powerbank-kingtech"
+                               title="Cargador para dispositivos móviles. Sistema adaptador con cable USB a Mini USB / Micro USB / IPhone / Nokia DC 2.0. Linterna Led. Potencia: 6600 Mah, rinde hasta 3 cargas dependiendo del dispositivo. Incluye estuche protector.
+Potencia: 6600 Mah
+Medidas: 13 x 8,5 x 3,6 cm
+Peso: 0,24 kg">
+                                <img src="img/products/6ef245fe4a62fbc3e232bf41263bcf201e960104.jpg" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Pendrive metálico, diseño compacto. Salidas USB y Micro USB.
+Compatibilidad conexión OTG.
+Capacidad: 8 GB. / 16 GB.
+Medidas: 3,5 x 1,2 x 0,4 cm. Peso: 28 Gr.">
+                            <a href="/AR/es/products/tecnologia/computacion/pendrive-slim-usb-micro-usb"
+                               title="Pendrive metálico, diseño compacto. Salidas USB y Micro USB.
+Compatibilidad conexión OTG.
+Capacidad: 8 GB. / 16 GB.
+Medidas: 3,5 x 1,2 x 0,4 cm. Peso: 28 Gr.">
+                                <img src="img/products/5be27c619f83daaad045d7b589172aa898bd170b.jpg" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Bolígrafo retráctil de cuerpo sólido estilo bamboo. Clip metálico.">
+                            <a href="/AR/es/products/boligrafos/metalicos/eco-bamboo"
+                               title="Bolígrafo retráctil de cuerpo sólido estilo bamboo. Clip metálico.">
+                                <img src="img/products/5209ebc9c6849557a65f8314f9929863707fe789.png" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Ahora vas a poder escuchar tu lista de música en la ducha con el nuevo parlante inalámbrico Kingtech resistente al agua. No vas a volver perder ninguna llamada mientras te duchás, contestá tu teléfono desde el modo manos libres.
+Ademas, posee una ventosa para adherir a la pared. Bateria recargable vía USB.
+Alcance Bluetooth: 10 Mts.
+Poténcia: 35 Watts. ">
+                            <a href="/AR/es/products/tecnologia/otros/bluetooth-shower-speaker-kingtech"
+                               title="Ahora vas a poder escuchar tu lista de música en la ducha con el nuevo parlante inalámbrico Kingtech resistente al agua. No vas a volver perder ninguna llamada mientras te duchás, contestá tu teléfono desde el modo manos libres.
+Ademas, posee una ventosa para adherir a la pared. Bateria recargable vía USB.
+Alcance Bluetooth: 10 Mts.
+Poténcia: 35 Watts. ">
+                                <img src="img/products/e830c0dbddc7450603f8d3cbf7bbcecd86a50337.jpg" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Mochila portalaptop con bolsillo para ipad/tablets/e-reader.
+Bolsillos laterales para botellas. Bolsillo frontal con panel organizador. Handgrip y correas de medida regulable acolchadas.
+Capacidad: 22 Lts.
+Medidas: 48 x 33 x 22 cm.
+Bolsillo porta Laptop: 17''">
+                            <a href="/AR/es/products/bolsos-y-mochilas/mochilas/tribune-ogio-1"
+                               title="Mochila portalaptop con bolsillo para ipad/tablets/e-reader.
+Bolsillos laterales para botellas. Bolsillo frontal con panel organizador. Handgrip y correas de medida regulable acolchadas.
+Capacidad: 22 Lts.
+Medidas: 48 x 33 x 22 cm.
+Bolsillo porta Laptop: 17''">
+                                <img src="img/products/ae717b0e3fe413be54004b51ef46b79a2f3a35ad.jpg" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bxslider-inner">
+                        <div class="lshowcase-tooltip"
+                             title="Set porta cartas simil carpincho con cierre perimetral. Incluye anotador y trucometro.
+- Cartas genericas opcionales.- Cartas personalizadas opcionales (consultar cantidad y tiempos de producción).- Bolígrafo  opcional.
+
+Medida aprox.: 18,2 x 12,7 x 3,1 cm.
+ Peso: 170 Grs.">
+                            <a href="/AR/es/products/hogar-tiempo-libre/tiempo-libre/set-de-cartas-los-amigos"
+                               title="Set porta cartas simil carpincho con cierre perimetral. Incluye anotador y trucometro.
+- Cartas genericas opcionales.- Cartas personalizadas opcionales (consultar cantidad y tiempos de producción).- Bolígrafo  opcional.
+
+Medida aprox.: 18,2 x 12,7 x 3,1 cm.
+ Peso: 170 Grs.">
+                                <img src="img/products/264d2526565a1a7825428dca6967fba6e7e6c062.jpg" height="100%"
+                                     width="100%" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="homeTitle">
+                <tr>
+                    <td class="homeTitle2">
+                        <div class="homeTitle2Div"><h1>Novedades</h1></div>
+                    </td>
+                </tr>
+            </table>
+            <div class="novedades">
+                <div class="bxslider">
+                    <div class="lshowcase-tooltip" title="Carrito mochila porta laptop. Ruedas de alto impacto de mayor durabilidad con fundas laterales con cierre. Bolsillo lateral vertical porta reproductor de MP3 con salida de auricular. Manija de acarreo metálica con cierre para ocultarla. Espalda anatómica extra acolchada. Tiras opcionales traseras para llevarlo como mochila con cierre para ocultarlas.
+Medidas: 46 x 36 x 27 cm.
+Capacidad: 44,7 Lt.
+ ">
+                        <a href="/AR/es/products/bolsos-y-mochilas/mochilas/driver-se-dunlop"
+                           title="Carrito mochila porta laptop. Ruedas de alto impacto de mayor durabilidad con fundas laterales con cierre. Bolsillo lateral vertical porta reproductor de MP3 con salida de auricular. Manija de acarreo metálica con cierre para ocultarla. Espalda anatómica extra acolchada. Tiras opcionales traseras para llevarlo como mochila con cierre para ocultarlas.
+Medidas: 46 x 36 x 27 cm.
+Capacidad: 44,7 Lt.
+ ">
+                            <img src="img/products/39e959f67246925c58b209b714ab294ac9089c9f.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Bolígrafo de cuerpo sólido ergonómico retractil. Aro, clip y pulsador de metal.
+Trazo 1.0 mm.
+Cartucho tipo Parker">
+                        <a href="/AR/es/products/boligrafos/plasticos/new-galaxy"
+                           title="Bolígrafo de cuerpo sólido ergonómico retractil. Aro, clip y pulsador de metal.
+Trazo 1.0 mm.
+Cartucho tipo Parker">
+                            <img src="img/products/39e9673235e1f8c0790f2b789827b39a29e02b86.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Paraguas de calle, con mango, punteras y puño curvo de madera, 8 gajos, incluye funda.
+Medida: 1,10 mt">
+                        <a href="/AR/es/products/paraguas/todos-2/paraguas-street-pg-006"
+                           title="Paraguas de calle, con mango, punteras y puño curvo de madera, 8 gajos, incluye funda.
+Medida: 1,10 mt">
+                            <img src="img/products/f15698713e586e3c84ca8ca365cf97b3395319ba.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Bolso para equipo de mate Pampa Spirit con compartimiento principal acolchado y bolsillo de red interno. Base impermeable reforzada.
+Handgrip acolchado y correa regulable antideslizante.
+Capacidad: 10 Lts.
+Medida: 21 x 34 x 10 Cm.">
+                        <a href="/AR/es/products/bolsos-y-mochilas/bolsos/bolso-matero-pampa-spirit"
+                           title="Bolso para equipo de mate Pampa Spirit con compartimiento principal acolchado y bolsillo de red interno. Base impermeable reforzada.
+Handgrip acolchado y correa regulable antideslizante.
+Capacidad: 10 Lts.
+Medida: 21 x 34 x 10 Cm.">
+                            <img src="img/products/db3685b69f0849811f94a0ab699bf115680fc393.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Bolso Carry-on con gran movilidad gracias a su manija retráctil y ruedas estilo skate de suave rodamiento y gran estabilidad. Handgrip acolchado lateral, correas internas, y bolsillo organizador de red.
+Capacidad: 46 Lts.
+Medidas: 55 x 35 x 25 Cm.">
+                        <a href="/AR/es/products/bolsos-y-mochilas/valijas-carry-on/layover-ogio"
+                           title="Bolso Carry-on con gran movilidad gracias a su manija retráctil y ruedas estilo skate de suave rodamiento y gran estabilidad. Handgrip acolchado lateral, correas internas, y bolsillo organizador de red.
+Capacidad: 46 Lts.
+Medidas: 55 x 35 x 25 Cm.">
+                            <img src="img/products/ec6927814ed3af42dd893fe298c625adfd84c702.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Porta celular para automóvil de medida extensible hasta 10 cm. Compatible con todas las marcas y modelos de celulares.
+Base antideslizante y anti rayaduras, posee 2 asas de sostén firma para evitar caídas.
+Ventosa con traba de seguridad. Cabeza móvil con rotación de 360 grados.
+Medidas: 14,75 x 7,5 x 15 Cm.
+Peso: 131 Gr.">
+                        <a href="/AR/es/products/tecnologia/otros/mobile-phone-holder-kingtech"
+                           title="Porta celular para automóvil de medida extensible hasta 10 cm. Compatible con todas las marcas y modelos de celulares.
+Base antideslizante y anti rayaduras, posee 2 asas de sostén firma para evitar caídas.
+Ventosa con traba de seguridad. Cabeza móvil con rotación de 360 grados.
+Medidas: 14,75 x 7,5 x 15 Cm.
+Peso: 131 Gr.">
+                            <img src="img/products/d0e6b426ae429846e2784c11e5456a997691b996.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Novedosa linterna powerbank de energia solar. Usala como linterna, lampara y como powerbank para cargar tus dispositivos moviles en el lugar que estes.
+3 modos de luz, cargalo con la energia del sol, o con energia electrica 5v, modo de señal de emergencia intermitente SOS.
+
+Medidas: 4,5 x 8,5 cm
+Peso: 137 gr.">
+                        <a href="/AR/es/products/tecnologia/otros/linterna-powerbank-solar"
+                           title="Novedosa linterna powerbank de energia solar. Usala como linterna, lampara y como powerbank para cargar tus dispositivos moviles en el lugar que estes.
+3 modos de luz, cargalo con la energia del sol, o con energia electrica 5v, modo de señal de emergencia intermitente SOS.
+
+Medidas: 4,5 x 8,5 cm
+Peso: 137 gr.">
+                            <img src="img/products/fa62289a3db408462afe98ee84086d681910b12a.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                    <div class="lshowcase-tooltip" title="Pelota de goma anti-stress. ">
+                        <a href="/AR/es/products/escritorio/accesorios/pelota-anti-stress-as028"
+                           title="Pelota de goma anti-stress. ">
+                            <img src="img/products/2e5a62fbb0b6bb7e378ab9453622ba620a40c228.jpg" height="100%" width="100%" alt="" />                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

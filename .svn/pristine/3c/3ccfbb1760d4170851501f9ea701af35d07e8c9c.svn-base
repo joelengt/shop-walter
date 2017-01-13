@@ -1,0 +1,69 @@
+<?php $__env->startSection('contenido'); ?>
+    <div class="slider">
+        <div class="slider-wrapper theme-default">
+            <div class="ribbon"></div>
+            <?php foreach($sliders as $slider): ?>
+            <div id="slider" class="nivoSlider">
+                <?php foreach($slider->imagenes as $imagen): ?>
+                <?php if($imagen->pivot->habilitado==1): ?>
+                <a href=<?php if(!empty($imagen->pivot->url)): ?>"<?php echo e($imagen->pivot->url); ?>"<?php else: ?>"#"<?php endif; ?> >
+                    <img src="<?php echo e(asset($imagen->ruta_imagen)); ?>" />
+                </a>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('#slider').nivoSlider({
+                    effect: 'random', // Specify sets like: 'fold,fade,sliceDown'
+                    animSpeed: 500, // Slide transition speed
+                    pauseTime: 3000, // How long each slide will show
+                    directionNav: true, // Next & Prev navigation
+                    controlNav: true, // 1,2,3... navigation
+                    controlNavThumbs: false, // Use thumbnails for Control Nav
+                    controlNavThumbsFromRel: false, // Use image rel for thumbs
+                    keyboardNav: false, // Use left & right arrows
+                    pauseOnHover: true, // Stop animation while hovering
+                    manualAdvance: false, // Force manual transitions
+                    captionOpacity: 0.8, // Universal caption opacity
+                    prevText: 'Prev', // Prev directionNav text
+                    nextText: 'Próx' // Next directionNav text
+                });
+            });
+        </script>
+    </div>
+
+    <div class="general1home">
+        <div class="container general2 home">
+            <?php foreach($carruseles as $carrusel): ?>
+                <?php if(count($carrusel->productos)): ?>
+                <table class="homeTitle">
+                    <tr>
+                        <td class="homeTitle2">
+                            <div class="homeTitle2Div"><h1><?php echo e(strtoupper($carrusel->nombre_carrusel)); ?></h1></div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="destacados">
+                    <div class="bxslider">
+                        <?php foreach($carrusel->productos as $producto): ?>
+                        <div class="bxslider-inner">
+                            <div class="lshowcase-tooltip" title="<?php echo e($producto->descripcion); ?>">
+                                <a href="<?php echo e(asset($producto->GetUrlDetalleProducto())); ?>" title="<?php echo e($producto->descripcion); ?>">
+                                    <img src="<?php echo e($producto->imagenes[0]->ruta_imagen); ?>" height="100%" width="100%" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

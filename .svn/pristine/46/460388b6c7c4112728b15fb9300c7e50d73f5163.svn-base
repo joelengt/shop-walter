@@ -1,0 +1,45 @@
+<?php $__env->startSection('contenido'); ?>
+    <div class="general1">
+        <div class="container general2 quienessomos">
+            <div class="col-md-12 listado">
+                <h1>Premios Mercurio 2011 - Zecat ganador de 2 premios</h1>
+                <p><img src="http://farm8.staticflickr.com/7030/6461198737_20bf9f2729_z.jpg" alt="" width="640" height="248"></p>
+                <p>&nbsp;</p>
+                <h2><strong>Zecat ha sido ganador del Premio Mercurio 2011</strong></h2>
+                <p><strong>- Categoría Servicios-Pyme</strong></p>
+                <p><strong>- Mercurio de Bronce dentro de todas las empresas Pymes ganadoras</strong></p>
+                <p>&nbsp;</p>
+                <p><strong><em>Qué es el Premio Mercurio</em></strong></p>
+                <p>Es un premio que otorga hace 30 años la Asociación Argentina de Marketing siendo el reconocimiento nacional más importante para quienes desarrollan estrategias comerciales exitosas, representadas a través de campañas que involucren una acción integral de marketing</p>
+                <p>&nbsp;</p>
+                <p><strong><em>Empresas que participan</em></strong></p>
+                <p>Participan empresas de todo tipo del país que tiene potenciales casos de éxito</p>
+                <p>Algunos de los participantes de este año; Unilever, Molinos, Ford, Quilmes, Gobierno de la Ciudad de Córdoba, Artear, Cadena 3 de Córdoba, Nestlé, Sygenta, Vía Cottone, Zecat</p>
+                <p>Se presentaron 225 casos</p>
+                <p>50 fueron finalistas</p>
+                <p>30 fueron premiados como ganadores en su categoría</p>
+                <p>6 empresas accedieron a premios de oro, plata y bronce</p>
+                <p>Zecat fue una de las compañías premiadas con el Bronce&nbsp;</p>
+                <p>&nbsp;</p>
+                <p><strong><em>Cuáles son las categorías?</em></strong></p>
+                <p>Bienes de Consumo Masivo – Alimenticios (bebidas y jugos, frigoríficos, pesqueras, molinos y aceites, productos alimenticios en general)&nbsp;</p>
+                <p>Bienes de Consumo Masivo – No Alimenticios (limpieza y cosméticos, productos fotográficos, tabacaleras)</p>
+                <p>Bienes Durables (bienes de consumo final durables como: artículos para el hogar, automotores, muebles, neumáticos y productos de caucho)</p>
+                <p>Tecnológico &nbsp;(telefonía, internet, correos, equipos electrónicos, hardware, software)</p>
+                <p>Servicios Financieros (AFJP, bancos, financieras, compañías de seguros, agentes bursátiles).</p>
+                <p>Insumos (celulosa y papel, curtiembres, agrícolas y ganaderas, petroleras, madereras, minería, metalúrgicas y siderúrgicas, industria plástica y química, vidrio y materiales para la construcción)</p>
+                <p>Retail (supermercados, shopping centers, cadenas comerciales, logística, distribución, textiles y calzado, gastronomía)</p>
+                <p>Inmobiliario (constructoras, barrios privados, urbanizaciones)</p>
+                <p>Servicios (gas, electricidad, aguas, seguridad, concesionarios viales, transporte ferroviario, transporte marítimo y fluvial, transporte aéreo, transporte terrestre)</p>
+                <p>Medios y Consultoría (medios de comunicación, productoras, agencias de publicidad, de marketing, de investigación de mercado, consultoras )</p>
+                <p>Salud (laboratorios medicinales, droguerías, medicinas prepagas, establecimientos de salud)</p>
+                <p>Turismo (alojamiento, transporte, servicios turísticos, organizaciones de destino, &nbsp;servicios al turista y otras)</p>
+                <p>Entretenimiento (parques temáticos, zoológicos, clubes, deportistas, management deportivo, merchandising)</p>
+                <p>Educación (colegios, universidades, libros, editoriales, institutos de enseñanza de todas las categorías)</p>
+                <p>Responsabilidad Social (ONGs, cualquier empresa o institución que realice una acción dirigida al mejoramiento de la calidad de vida, y a la conciencia ecológica)</p>
+                <p>Casos Latinoamericanos (casos que puedan incluirse en cualquiera de las categorías mencionadas, desarrollados en cualquier país latinoamericano)</p>
+                <p>&nbsp;</p>    </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

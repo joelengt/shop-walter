@@ -1,0 +1,228 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class TablasIniciales extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('perfiles', function (Blueprint $tabla) {
+            $tabla->increments('id_perfil');
+            $tabla->string('nombre_perfil',100);
+            $tabla->tinyInteger('habilitado')->default(1);
+        });
+
+        Schema::create('usuarios', function (Blueprint $tabla) {
+            $tabla->increments('id_usuario');
+            $tabla->string('username',100);
+            $tabla->string('password',300);
+            $tabla->integer('id_perfil');
+            $tabla->tinyInteger('habilitado')->default(1);
+        });
+
+        Schema::create('carruseles', function (Blueprint $tabla) {
+            $tabla->increments('id_carrusel');
+            $tabla->string('nombre_carrusel',100);
+            $tabla->string('nombre_corto',100)->nullable();
+            $tabla->integer('orden');
+            $tabla->tinyInteger('habilitado');
+        });
+
+        Schema::create('colores', function (Blueprint $tabla) {
+            $tabla->increments('id_color');
+            $tabla->string('nombre_color',100);
+            $tabla->string('codigo_color',100);
+            $tabla->tinyInteger('habilitado');
+        });
+
+        Schema::create('imagenes', function (Blueprint $tabla) {
+            $tabla->increments('id_imagen');
+            $tabla->string('ruta_imagen',400);
+            $tabla->tinyInteger('habilitado');
+        });
+
+        if (!Schema::hasTable('especificaciones')) {
+            Schema::create('especificaciones', function (Blueprint $tabla) {
+                $tabla->increments('id_especificacion');
+                $tabla->string('nombre_especificacion', 100);
+                $tabla->integer('icono');
+                $tabla->tinyInteger('habilitado');
+            });
+        }
+
+        if (!Schema::hasTable('categorias')) {
+            Schema::create('categorias', function (Blueprint $tabla) {
+                $tabla->increments('id_categoria');
+                $tabla->integer('id_categoria_padre')->unsigned()->nullable();
+                $tabla->string('nombre_categoria',250);
+                $tabla->integer('id_imagen')->unsigned()->nullable();
+                $tabla->string('slug',250)->nullable();
+                $tabla->integer('orden')->default(1);
+                $tabla->tinyInteger('habilitado')->default();
+            });
+
+            Schema::table('categorias', function (Blueprint $tabla) {
+                $tabla->foreign('id_categoria_padre')->references('id_categoria')->on('categorias');
+                $tabla->foreign('id_imagen')->references('id_imagen')->on('imagenes');
+            });
+        }
+
+        Schema::create('productos', function (Blueprint $tabla) {
+            $tabla->increments('id_producto');
+            $tabla->string('nombre_producto',400);
+            $tabla->text('descripcion');
+            $tabla->integer('stock')->default(0);
+            $tabla->float('precio')->default(0);
+            $tabla->string('slug',400);
+            $tabla->date('fecha_publicacion');
+            $tabla->integer('id_usuario_creacion')->nullable();
+            $tabla->integer('id_usuario_modificacion')->nullable();
+            $tabla->dateTime('fecha_creacion');
+            $tabla->dateTime('fecha_modificacion');
+            $tabla->tinyInteger('habilitado')->default(1);
+
+        });
+
+        if (!Schema::hasTable('productos_categorias')) {
+
+            Schema::create('productos_categorias', function (Blueprint $tabla) {
+                $tabla->increments('id_producto_categoria');
+                $tabla->integer('id_producto')->unsigned();
+                $tabla->integer('id_categoria')->unsigned();
+            });
+
+            Schema::table('productos_categorias', function (Blueprint $tabla) {
+                $tabla->foreign('id_producto')->references('id_producto')->on('productos');
+                $tabla->foreign('id_categoria')->references('id_categoria')->on('categorias');
+            });
+        }
+
+        if (!Schema::hasTable('galerias')) {
+            Schema::create('galerias', function (Blueprint $tabla) {
+                $tabla->increments('id_galeria');
+                $tabla->string('nombre_galeria', 200);
+                $tabla->tinyInteger('habilitado');
+            });
+        }
+
+        if (!Schema::hasTable('galerias_productos')) {
+            Schema::create('galerias_productos', function (Blueprint $tabla) {
+                $tabla->increments('id_galeria_producto');
+                $tabla->integer('id_galeria')->unsigned();
+                $tabla->integer('id_producto')->unsigned();
+            });
+
+            Schema::table('galerias_productos', function (Blueprint $tabla) {
+                $tabla->foreign('id_galeria')->references('id_galeria')->on('galerias');
+                $tabla->foreign('id_producto')->references('id_producto')->on('productos');
+            });
+        }
+
+        if (!Schema::hasTable('galerias_imagenes')) {
+            Schema::create('galerias_imagenes', function (Blueprint $tabla) {
+                $tabla->increments('id_galeria_imagen');
+                $tabla->integer('id_galeria')->unsigned();
+                $tabla->integer('id_imagen')->unsigned();
+            });
+
+            Schema::table('galerias_imagenes', function (Blueprint $tabla) {
+                $tabla->foreign('id_galeria')->references('id_galeria')->on('galerias');
+                $tabla->foreign('id_imagen')->references('id_imagen')->on('imagenes');
+            });
+        }
+
+        if (!Schema::hasTable('productos_especificaciones')) {
+            Schema::create('productos_especificaciones', function (Blueprint $tabla) {
+                $tabla->increments('id_producto_especificacion');
+                $tabla->integer('id_producto')->unsigned();
+                $tabla->integer('id_especificacion')->unsigned();
+            });
+
+            Schema::table('productos_especificaciones', function (Blueprint $tabla) {
+                $tabla->foreign('id_producto')->references('id_producto')->on('productos');
+                $tabla->foreign('id_especificacion')->references('id_especificacion')->on('especificaciones');
+            });
+        }
+
+        if (!Schema::hasTable('productos_carruseles')) {
+            Schema::create('productos_carruseles', function (Blueprint $tabla) {
+                $tabla->increments('id_producto_carrusel');
+                $tabla->integer('id_producto')->unsigned();
+                $tabla->integer('id_carrusel')->unsigned();
+            });
+
+            Schema::table('productos_carruseles', function (Blueprint $tabla) {
+                $tabla->foreign('id_producto')->references('id_producto')->on('productos');
+                $tabla->foreign('id_carrusel')->references('id_carrusel')->on('carruseles');
+            });
+        }
+
+        if (!Schema::hasTable('productos_colores')) {
+            Schema::create('productos_colores', function (Blueprint $tabla) {
+                $tabla->increments('id_producto_color');
+                $tabla->integer('id_producto')->unsigned();
+                $tabla->integer('id_color')->unsigned();
+            });
+
+            Schema::table('productos_colores', function (Blueprint $tabla) {
+                $tabla->foreign('id_producto')->references('id_producto')->on('productos');
+                $tabla->foreign('id_color')->references('id_color')->on('colores');
+            });
+        }
+
+        if (!Schema::hasTable('usuarios')) {
+            Schema::create('usuarios', function (Blueprint $tabla) {
+                $tabla->increments('id_usuario');
+                $tabla->string('username','100')->unsigned();
+                $tabla->string('password','300')->unsigned();
+                $tabla->integer('id_perfil')->unsigned()->nullable();
+                $tabla->tinyInteger('habilitado')->default(1);
+            });
+
+            Schema::table('usuarios', function (Blueprint $tabla) {
+                $tabla->foreign('id_perfil')->references('id_perfil')->on('perfiles');
+            });
+        }
+
+        if (!Schema::hasTable('productos')) {
+            Schema::table('productos', function (Blueprint $tabla) {
+                $tabla->foreign('id_usuario_creacion')->references('id_usuario')->on('usuarios');
+                $tabla->foreign('id_usuario_modificacion')->references('id_usuario')->on('usuarios');
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('perfiles');
+        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('carruseles');
+        Schema::dropIfExists('colores');
+        Schema::dropIfExists('imagenes');
+        Schema::dropIfExists('galerias');
+        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('productos');
+        Schema::dropIfExists('productos_categorias');
+        Schema::dropIfExists('galerias_productos');
+        Schema::dropIfExists('galerias_imagenes');
+        Schema::dropIfExists('productos_especificaciones');
+        Schema::dropIfExists('productos_carruseles');
+        Schema::dropIfExists('productos_colores');
+        Schema::dropIfExists('usuarios');
+
+        Schema::enableForeignKeyConstraints();
+    }
+}

@@ -1,0 +1,188 @@
+
+/* QUIENES SOMOS - LISTADO --------------------- */
+#laempresa > div > div > h2{
+    font-family: 'Exo2RegularCondensed';
+    font-size: 30px;
+    color: white;
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+div.col-md-4 > p{
+    font-family: 'Exo2RegularCondensed' !important;
+    font-size: 15px !important;
+    color: white; !important;
+    line-height: 23px !important;
+    background: none !important;
+}
+.quienessomos1 .listado {
+    font-family: 'Exo2RegularCondensed';
+    font-size: 15px;
+    color: #000000;
+}
+
+.quienessomos1 .listado h1 {
+    font-family: 'Exo2RegularCondensed';
+    font-size: 30px;
+    color: #da0000;
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+.quienessomos1 .listado h2 {
+    font-family: 'Exo2RegularCondensed';
+    font-size: 20px;
+    color: #000000;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+.quienessomos1 .listado h3 {
+    font-family: 'Exo2RegularCondensed';
+    font-size: 25px;
+    color: #000000;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+.quienessomos1 .listado p {
+    font-family: 'Exo2RegularCondensed';
+    font-size: 15px;
+    color: #000000;
+    line-height: 23px;
+    margin: 0;
+    padding: 0;
+    background: none !important;
+}
+
+.quienessomos1 .listado p a {
+    font-family: 'Exo2RegularCondensed';
+    font-size: 15px;
+    color: #000000;
+    line-height: 30px;
+}
+
+.quienessomos1 .listado span {
+    font-family: 'Exo2RegularCondensed' !important;
+    font-size: 15px !important;
+    color: #000000 !important;
+    line-height: 23px !important;
+    background:none !important;
+}
+
+.quienessomos1 .listado img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 10px auto;
+}
+.general3{
+    background-color: #D41022;
+    background-image: url('http://zecat.aristei.com.ar/web/images/quienes-somos/fondo_la_empresa.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+.general4{
+    background-color: white;
+    background-image: url('http://zecat.aristei.com.ar/web/images/quienes-somos/fondo_zecat_solidario.png');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+.general5{
+    background-color: #efefef;
+}
+#laempresa{
+    padding: 2em; 
+}
+#zecatsolidario{    
+    padding: 2em;    
+}
+#zecatsolidario,
+#nuestroseventos {
+    color:red;    
+}
+.col-md-9 > p:nth-child(1){
+    color: black;
+    padding: 2em;
+}
+#laempresa > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1),
+#nuestroseventos > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1){
+    border: none;
+    background: none;
+    box-shadow : none;
+}
+#zecatsolidario > div > div > h2,
+#nuestroseventos > div > div > h2{
+    font-family: 'Exo2RegularCondensed';
+    font-size: 30px;
+    color: #D41022;
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+.col-md-8 > p{
+    font-family: 'Exo2RegularCondensed' !important;
+    font-size: 15px !important;
+    color: black; !important;
+    line-height: 23px !important;
+    background: none !important;
+}
+#img-zecatsolidario{
+    padding: 1em;
+    width:90%;
+}
+#laempresa > div > div > div > div > div > a.bx-prev {
+    left: -80px;
+    width: 40px;
+    height: 40px;
+    background: url(/web/images/quienes-somos/bot_izq_blanco.png) no-repeat;
+    z-index: auto;
+}
+#laempresa > div > div > div > div > div > a.bx-next {
+    right: -60px;
+    width: 40px;
+    height: 40px;
+    display: inherit;
+    background: url(/web/images/quienes-somos/bot_der_blanco.png) no-repeat;
+    z-index: auto;
+}
+#nuestroseventos > div > div > div > div > div > a.bx-prev {
+    left: -80px;
+    width: 40px;
+    height: 40px;
+    background: url(/web/images/quienes-somos/bot_izq_gris.png) no-repeat;
+    z-index: auto;
+}
+#nuestroseventos > div > div > div > div > div > a.bx-next {
+    right: -60px;
+    width: 40px;
+    height: 40px;
+    display: inherit;
+    background: url(/web/images/quienes-somos/bot_der_gris.png) no-repeat;
+    z-index: auto;
+}
+.bx-wrapper .bx-controls-direction a.disabled {
+ display: inline !important;
+}
+/* padding-bottom and top for image */
+.mfp-no-margins img.mfp-img {
+	padding: 0;
+}
+/* position of shadow behind the image */
+.mfp-no-margins .mfp-figure:after {
+	top: 0;
+	bottom: 0;
+}
+/* padding for main container */
+.mfp-no-margins .mfp-container {
+	padding: 0;
+}
+.parrafoempresa{
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    text-align: justify;
+    font-family: 'Exo2RegularCondensed' !important;
+    font-size: 15px !important;
+    color: white; !important;
+    line-height: 23px !important;
+    background: none !important;
+}

@@ -1,0 +1,18 @@
+[2016-10-14 13:02:43] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function productos() on null' in /var/www/tienda_walter/app/Http/Controllers/TiendaControlador.php:191
+Stack trace:
+#0 {main}  
+[2016-10-14 13:03:04] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function productos() on null' in /var/www/tienda_walter/app/Http/Controllers/TiendaControlador.php:191
+Stack trace:
+#0 {main}  
+[2016-10-14 13:03:13] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function productos() on null' in /var/www/tienda_walter/app/Http/Controllers/TiendaControlador.php:191
+Stack trace:
+#0 {main}  
+[2016-10-14 13:04:07] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function productos() on null' in /var/www/tienda_walter/app/Http/Controllers/TiendaControlador.php:191
+Stack trace:
+#0 {main}  
+[2016-10-14 13:04:11] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function productos() on null' in /var/www/tienda_walter/app/Http/Controllers/TiendaControlador.php:191
+Stack trace:
+#0 {main}  
+[2016-10-14 13:07:09] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function productos() on null' in /var/www/tienda_walter/app/Http/Controllers/TiendaControlador.php:191
+Stack trace:
+#0 {main}  

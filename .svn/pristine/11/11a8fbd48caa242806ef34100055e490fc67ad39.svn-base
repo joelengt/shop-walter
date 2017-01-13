@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Sliders;
+use App\Modelos\SlidersImagenes;
+use App\Modelos\Imagenes;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use Auth;
+use DB;
+use Redirect;
+use Validator;
+
+class SlidersImagenesControlador extends Controller
+{
+    public function SlidersImagenes(Request $request,$id_slider)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            $imagenes = SlidersImagenes::where('id_slider', $id_slider)->paginate();
+            $slider = Sliders::find($id_slider);//dd($slider->imagenes);
+            return view("privado.slider-imagenes.lista-sliders-imagenes", compact(['slider', 'imagenes']));
+        }
+    }
+
+    public function AgregarImagenSlider(Request $request,$id_slider)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            if ($request->method() == 'GET') {
+                $slider = Sliders::find($id_slider);
+                return view('privado.slider-imagenes.agregar-imagen-slider',compact(['slider']));
+            }elseif ($request->method() == 'POST') {
+
+                $validator = Validator::make($request->all(), [
+                    'imagen_slider' => 'required|file|image',
+                    'habilitado' => 'required|in:0,1',
+                ]);
+
+                if ($validator->fails()) {
+
+                    return redirect(route('agregar-slider-imagen-admin',['id_slider'=>$id_slider]))
+                        ->withErrors($validator)
+                        ->withInput();
+                }
+
+                $datos = $request->only(['habilitado']);
+
+                $imagen = new Imagenes();
+
+                $imagen_slider = $request->file('imagen_slider');
+                $ruta_destino = 'sliders/';
+
+                if (!empty($imagen_slider) && $imagen_slider->isValid()) {
+                    $extension = $imagen_slider->getClientOriginalExtension();
+                    $nombre = GenerarCadenaAleatoria();
+                    $nombre_archivo = "{$nombre}.{$extension}";
+                    $imagen_slider->move($ruta_destino, $nombre_archivo);
+
+                    $imagen->ruta_imagen = "$ruta_destino$nombre_archivo";
+                }
+
+                $imagen->habilitado = $datos['habilitado'];
+                $imagen->save();
+
+                DB::table('sliders_imagenes')->insert(
+                    ['id_slider' => $id_slider, 'id_imagen' => $imagen->id_imagen]
+                );
+
+                return Redirect::to(route('sliders-imagenes-admin',['id_slider'=>$id_slider]));
+            }
+        }
+
+
+    }
+}

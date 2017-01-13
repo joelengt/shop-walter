@@ -1,0 +1,89 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+/*
+Route::get('/', function () {
+    return view('welcome');
+});
+*/
+
+Route::get('/',['uses' => 'TiendaControlador@Inicio','as' => 'inicio-publico']);
+Route::post('/productos/enviar-consulta-productos',['uses' => 'ProductosControlador@EnviarConsultaProductos', 'as' => 'enviar-consulta-productos']);
+Route::get('/productos/busqueda-query',['uses' => 'ProductosControlador@BuscarQueryProductos', 'as' => 'buscar-query-productos']);
+Route::get('/productos/busqueda',['uses' => 'ProductosControlador@BuscarProductos', 'as' => 'buscar-productos']);
+Route::get('/productos/{categoria_padre}/{categoria_hija}/{producto}',['uses' => 'TiendaControlador@DetalleProducto','as' => 'detalle-producto-publico']);
+Route::get('/productos/{categoria_padre}/{categoria_hija}',['uses' => 'TiendaControlador@Categorias','as' => 'categorias-publico']);
+Route::get('/productos/{categoria_padre}',['uses' => 'TiendaControlador@Categorias','as' => 'categorias-publico']);
+Route::match(['get','post'],'/admin/login',['uses' => 'LoginControlador@Login','as' => 'login-admin']);
+Route::get('/loginout',['uses' => 'LoginControlador@CerrarSession' ,'as' => 'cerrar-session']);
+
+Route::get('/la-empresa',['uses' => 'TiendaControlador@LaEmpresa', 'as' => 'la-empresa']);
+Route::match(['get','post'],'/contacto',['uses' => 'TiendaControlador@Contacto', 'as' => 'contacto']);
+Route::get('/preguntas-frecuentes',['uses' => 'TiendaControlador@PreguntasFrecuentes', 'as' => 'preguntas-frecuentes']);
+Route::get('/catalogos',['uses' => 'TiendaControlador@Catalogos', 'as' => 'catalogos']);
+Route::get('/prensa-y-eventos',['uses' => 'TiendaControlador@PrensaEventos', 'as' => 'prensa-y-eventos']);
+Route::get('/trabaja-con-nosotros',['uses' => 'TiendaControlador@TrabajaNosotros', 'as' => 'trabaja-con-nosotros']);
+Route::get('/quienes-somos',['uses' => 'TiendaControlador@QuienesSomos', 'as' => 'quienes-somos']);
+Route::get('/como-efectuar-pedido',['uses' => 'TiendaControlador@ComoEfectuarPedido', 'as' => 'como-efectuar-pedido']);
+Route::match(['get','post'],'/cotizacion',['uses' => 'TiendaControlador@Cotizacion','as' => 'cotizacion']);
+Route::post('/producto/agregar-producto-cotizacion',['uses' => 'TiendaControlador@AgregarProductoCotizacion','as' => 'agregar-producto-cotizacion']);
+Route::post('/producto/cotizacion/vaciar',['uses' => 'TiendaControlador@VaciarCotizacion','as' => 'vaciar-cotizacion']);
+Route::match(['get','post'],'/producto/cotizacion/enviar',['uses' => 'TiendaControlador@EnviarCotizacion','as' => 'enviar-cotizacion']);
+Route::get('/terminos-y-condiciones',['uses' => 'TiendaControlador@TerminosCondiciones','as' => 'terminos-y-condiciones']);
+
+Route::get('/admin/categorias',['uses' => 'CategoriasControlador@Categorias','as' => 'categorias-admin']);
+Route::get('/admin/categorias/borrar/{id_categoria}',['uses' => 'CategoriasControlador@BorrarCategorias','as' => 'borrar-categorias-admin']);
+Route::match(['get','post'],'/admin/categorias/editar/{id_categoria}',['uses' => 'CategoriasControlador@EditarCategorias','as' => 'editar-categorias-admin']);
+Route::match(['get','post'],'/admin/categorias/agregar',['uses' => 'CategoriasControlador@AgregarCategorias','as' => 'agregar-categorias-admin']);
+
+Route::get('/admin/colores',['uses' => 'ColoresControlador@Colores','as' => 'colores-admin']);
+Route::get('/admin/colores/borrar/{id_color}',['uses' => 'ColoresControlador@BorrarColores','as' => 'borrar-colores-admin']);
+Route::match(['get','post'],'/admin/colores/editar/{id_color}',['uses' => 'ColoresControlador@EditarColores','as' => 'editar-colores-admin']);
+Route::match(['get','post'],'/admin/colores/agregar',['uses' => 'ColoresControlador@AgregarColores','as' => 'agregar-colores-admin']);
+
+Route::get('/admin/usuarios',['uses' => 'UsuariosControlador@Usuarios','as' => 'usuarios-admin']);
+Route::match(['get','post'],'/admin/usuarios/editar/{id_usuario}',['uses' => 'UsuariosControlador@EditarUsuarios','as' => 'editar-usuarios-admin']);
+Route::match(['get','post'],'/admin/usuarios/agregar',['uses' => 'UsuariosControlador@AgregarUsuarios','as' => 'agregar-usuarios-admin']);
+
+Route::get('/admin/especificaciones',['uses' => 'EspecificacionesControlador@Especificaciones','as' => 'especificaciones-admin']);
+Route::get('/admin/especificacion/borrar/{id_especificacion}',['uses' => 'EspecificacionesControlador@BorrarEspecificacion','as' => 'borrar-especificacion-admin']);
+Route::match(['get','post'],'/admin/especificacion/editar/{id_especificacion}',['uses' => 'EspecificacionesControlador@EditarEspecificacion','as' => 'editar-especificacion-admin']);
+Route::match(['get','post'],'/admin/especificacion/agregar',['uses' => 'EspecificacionesControlador@AgregarEspecificacion','as' => 'agregar-especificacion-admin']);
+
+Route::get('/admin/productos',['uses' => 'ProductosControlador@Productos','as' => 'productos-admin']);
+Route::get('/admin/producto/borrar/{id_producto}',['uses' => 'ProductosControlador@BorrarProducto','as' => 'borrar-producto-admin']);
+Route::match(['get','post'],'/admin/producto/editar/{id_producto}',['uses' => 'ProductosControlador@EditarProducto','as' => 'editar-producto-admin']);
+Route::match(['get','post'],'/admin/producto/agregar',['uses' => 'ProductosControlador@AgregarProducto','as' => 'agregar-producto-admin']);
+
+Route::get('/admin/productos-imagenes/{id_producto}',['uses' => 'ProductosImagenesControlador@ProductosImagenes','as' => 'productos-imagenes-admin']);
+Route::get('/admin/producto-imagen/borrar/{id_producto}/{id_imagen}',['uses' => 'ProductosImagenesControlador@BorrarImagen','as' => 'borrar-producto-imagen-admin']);
+Route::match(['get','post'],'/admin/producto-imagen/editar/{id_producto}/{id_imagen}',['uses' => 'ProductosImagenesControlador@EditarProductoImagen','as' => 'editar-producto-imagen-admin']);
+Route::match(['get','post'],'/admin/producto-imagen/agregar/{id_producto}',['uses' => 'ProductosImagenesControlador@AgregarProductoImagen','as' => 'agregar-producto-imagen-admin']);
+
+Route::get('/admin/carruseles',['uses' => 'CarruselesControlador@Carruseles','as' => 'carruseles-admin']);
+Route::get('/admin/carruseles/borrar/{id_carrusel}',['uses' => 'CarruselesControlador@BorrarCarrusel','as' => 'borrar-carrusel-admin']);
+Route::match(['get','post'],'/admin/carrusel/editar/{id_carrusel}',['uses' => 'CarruselesControlador@EditarCarrusel','as' => 'editar-carrusel-admin']);
+Route::match(['get','post'],'/admin/carrusel/agregar',['uses' => 'CarruselesControlador@AgregarCarrusel','as' => 'agregar-carrusel-admin']);
+
+Route::get('/admin/sliders',['uses' => 'SlidersControlador@Sliders','as' => 'sliders-admin']);
+Route::get('/admin/slider/borrar/{id_slider}',['uses' => 'SlidersControlador@BorrarSlider','as' => 'borrar-slider-admin']);
+Route::match(['get','post'],'/admin/slider/editar/{id_slider}',['uses' => 'SlidersControlador@EditarSlider','as' => 'editar-slider-admin']);
+Route::match(['get','post'],'/admin/slider/agregar',['uses' => 'SlidersControlador@AgregarSlider','as' => 'agregar-slider-admin']);
+
+Route::get('/admin/sliders-imagenes/{id_slider}',['uses' => 'SlidersImagenesControlador@SlidersImagenes','as' => 'sliders-imagenes-admin']);
+Route::match(['get','post'],'/admin/slider-imagen/{id_slider}/editar/{id_slider_imagen}',['uses' => 'SlidersImagenesControlador@EditarSlider','as' => 'editar-slider-imagen-admin']);
+Route::match(['get','post'],'/admin/slider-imagen/{id_slider}/agregar',['uses' => 'SlidersImagenesControlador@AgregarSlider','as' => 'agregar-slider-imagen-admin']);
+
+Route::get('/admin/configuraciones',['uses' => 'ConfiguracionesControlador@Configuraciones','as' => 'configuraciones-admin']);
+Route::match(['get','post'],'/admin/configuracion/editar/{id_configuracion}',['uses' => 'ConfiguracionesControlador@EditarConfiguracion', 'as' => 'editar-configuracion']);
+Route::match(['get','post'],'/admin/configuracion/agregar',['uses' => 'ConfiguracionesControlador@AgregarConfiguracion', 'as' => 'agregar-configuracion']);
+Route::get('/admin/configuracion/borrar/{id_configuracion}',['uses' => 'ConfiguracionesControlador@BorrarConfiguracion','as' => 'borrar-configuracion']);

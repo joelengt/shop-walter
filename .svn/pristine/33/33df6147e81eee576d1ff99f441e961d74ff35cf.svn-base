@@ -1,0 +1,184 @@
+@extends('privado.nueva-plantilla-principal')
+
+@section('contenido')
+    <style>
+        .pagination {
+            margin: 5px 0;
+        }
+    </style>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Editar producto</h3>
+                </div>
+                <form name="editar-producto" id="editar-producto" style="font-size: 11px;" class="form-horizontal" action="{{ route("editar-producto-admin",['id_producto' => $producto->id_producto]) }}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                    <div class="box-body">
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="nombre_producto" class="col-md-2 control-label">Nombre producto(*):</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control input-sm" id="nombre_producto" name="nombre_producto" value="{{ $producto->nombre_producto }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="descripcion" class="col-md-2 control-label">Descripci&oacute;n(*):</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control input-sm" id="descripcion" name="descripcion" style="height: 150px;">{{ $producto->descripcion }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="stock" class="col-md-4 control-label">Stock(*):</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="stock" name="stock" value="{{ $producto->stock }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="precio" class="col-md-4 control-label">Precio(*):</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="precio" name="precio" value="{{ $producto->precio }}" required>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_color" class="col-md-2 control-label">Colores:</label>
+                            <div class="checkbox col-md-10">
+                            @foreach($colores as $color)
+                                <label>
+                                    <?php
+                                        $checked = "";
+
+                                        foreach ($producto->colores as $color_producto){
+                                            if($color_producto->id_color == $color->id_color){
+                                                $checked = "checked";
+                                                break;
+                                            }
+                                        }
+                                    ?>
+                                    <input type="checkbox" name="id_color[]" id="id_color" value="{{ $color->id_color }}" {{ $checked }}>
+                                    {{ $color->nombre_color }}
+                                </label>
+                            @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_especificacion" class="col-md-2 control-label">Especificaciones:</label>
+                            <div class="checkbox col-md-10">
+
+                                @foreach($especificaciones as $especificacion)
+                                    <label>
+                                        <?php
+                                            $checked = "";
+
+                                            foreach ($producto->especificaciones as $especificacion_producto){
+                                                if($especificacion_producto->id_especificacion == $especificacion->id_especificacion){
+                                                    $checked = "checked";
+                                                    break;
+                                                }
+                                            }
+                                        ?>
+                                        <input type="checkbox" name="id_especificacion[]" id="id_especificacion" value="{{ $especificacion->id_especificacion }}" {{ $checked }}>
+                                        {{ PrimerasEnMayusculas($especificacion->nombre_especificacion) }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_categoria" class="col-md-2 control-label">Categorias:</label>
+                            <div class="checkbox col-md-10">
+                                @foreach($subcategorias as $subcategoria)
+                                    <label>
+                                        <?php
+                                            $checked = "";
+
+                                            foreach ($producto->categorias as $categoria_producto){
+                                                if($categoria_producto->id_categoria == $subcategoria->id_categoria){
+                                                    $checked = "checked";
+                                                    break;
+                                                }
+                                            }
+                                        ?>
+                                        <input type="checkbox" id="id_categoria" name="id_categoria[]" value="{{ $subcategoria->id_categoria }}"  {{ $checked }}>
+                                        {{ $subcategoria->nombre_categoria }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_carrusel" class="col-md-2 control-label">Carruseles:</label>
+                            <div class="checkbox col-md-10">
+                                @foreach($carruseles as $carrusel)
+                                    <label>
+                                        <?php
+                                        $checked = "";
+
+                                        foreach ($producto->carruseles as $carrusel_producto){
+                                            if($carrusel_producto->id_carrusel == $carrusel->id_carrusel){
+                                                $checked = "checked";
+                                                break;
+                                            }
+                                        }
+                                        ?>
+                                        <input type="checkbox" name="id_carrusel[]" id="id_carrusel" value="{{ $carrusel->id_carrusel }}" {{ $checked }}>
+                                        {{ PrimerasEnMayusculas($carrusel->nombre_carrusel) }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="fecha_publicacion" class="col-md-4 control-label">Fecha publicaci&oacute;n(*):</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="fecha_publicacion" name="fecha_publicacion" value="{{ $producto->fecha_publicacion }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="habilitado" class="col-md-4 control-label">Habilitado:</label>
+                            <div class="col-md-8">
+                                <select class="form-control input-sm" name="habilitado" id="habilitado">
+                                    <option value="1" @if($producto->habilitado=='1') selected @endif>Si</option>
+                                    <option value="0" @if($producto->habilitado=='0') selected @endif>No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Grabar</button>
+                        <a class="btn btn-warning btn-close" href="{{ URL::previous() }}">Cancelar</a>
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $('#fecha_publicacion').datepicker({
+                format: "yyyy-mm-dd",
+                startDate: "{{ date('Y-m-d') }}",
+                language: "es"
+            });
+        });
+    </script>
+@endsection

@@ -1,0 +1,37 @@
+<?php $__env->startSection('contenido'); ?>
+    <div class="general3">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="quienessomos1">
+                    <div class="container-fluid" id="laempresa">
+                        <div class="row-fluid">
+                            <div class="col-md-12"><h2>LA EMPRESA - TOMAMOS MUY ENSERIO NUESTRO TRABAJO</h2></div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="col-md-12 parrafoempresa">
+                                <p>Cuando una marca ofrece un regalo promocional, este regalo, entra a la casa de una persona, y cuando una marca llega ahí, esa marca gana un fan, y un fan se identifica. La mochila que das, acompañará los sueños de un estudiante durante su carrera. Un termo obsequiado formará parte de mil rondas de mate y diversos recuerdos, una lapicera obsequiada servirá quizás para firmar los papeles de un nuevo hogar.
+                                    Ese regalo formará parte de las historias de la gente, convirtiéndose en mucho más que un simple objeto.
+                                    Ese es el poder de un regalo promocional.
+                                </p>
+                                <p>
+                                    Lo que regalamos habla mucho de quienes somos.
+                                    En Zecat nos ocupamos de que cada articulo promocional sea capaz de transmitir la esencia de las marcas de nuestros clientes, hablando por ellas con el mismo lenguaje con el que hablan a su publico.
+                                </p>
+                                <p>
+                                    Fundada en 1994, somos la empresa número uno en productos de promoción en la Argentina y contamos con presencia en toda la región.
+                                    Nuestro principal objetivo ha sido siempre crear productos que se usen, porque para nosotros un producto solo cobra valor cuando es útil para alguien, cuando entra a la vida de una persona.
+                                    Nuestro alto compromiso con la calidad es un factor clave en el desarrollo de producto. Somos la única empresa de merchandising en el país que cuenta con certificación ISO:9001 de procesos de calidad.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

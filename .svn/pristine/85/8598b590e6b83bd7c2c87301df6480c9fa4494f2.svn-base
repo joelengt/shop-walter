@@ -1,0 +1,123 @@
+<?php $__env->startSection('contenido'); ?>
+    <style>
+        .pagination {
+            margin: 5px 0;
+        }
+    </style>
+
+    <script>
+        function AgregarProducto()
+        {
+            location.href = "<?php echo e(route('agregar-producto-admin')); ?>"
+        }
+
+        function EditarProducto(codigo)
+        {
+            location.href = "<?php echo e(route('editar-producto-admin',['id_producto'=>''])); ?>/" + codigo;
+        }
+    </script>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border bg-light-blue">
+                    <h3 class="box-title">Productos registrados</h3>
+                </div>
+
+                <div class="box-body">
+
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row" style="margin: 1px;font-size: 11px;">
+                                <div class="col-sm-12 table-responsive">
+                                    <table id="example2" class="table table-bordered table-hover table-condensed table-striped" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                        <tr role="row" class="bg-light-blue">
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=""></th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Nombre producto</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Fecha publicaci&oacute;n</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Stock</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Precio</th>
+
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Especificaciones</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Colores</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Categorias</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Imagenes</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Habilitado</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($productos as $producto): ?>
+                                            <tr role="row" class="odd">
+                                                <td><i class="fa fa-edit" title="Editar Registro" onclick="EditarProducto(<?php echo e($producto->id_producto); ?>)"></i> <i class="fa fa-plus" title="Nuevo Registro" onclick="AgregarProducto()"></i></td>
+
+                                                <td><?php echo e($producto->nombre_producto); ?></td>
+                                                <td><?php echo e($producto->fecha_publicacion); ?></td>
+                                                <td><?php echo e($producto->stock); ?></td>
+                                                <td><?php echo e($producto->precio); ?></td>
+                                                <?php
+                                                    $especificaciones = "";
+                                                    foreach ($producto->especificaciones as $especificacion){
+                                                        $especificaciones .= " {$especificacion->nombre_especificacion},";
+                                                    }
+
+                                                    $especificaciones = trim($especificaciones,",");
+                                                ?>
+                                                <td><?php echo e(isset($especificaciones) ? $especificaciones : 'Sin especificaciones'); ?></td>
+                                                <?php
+                                                    $colores = "";
+                                                    foreach ($producto->colores as $color){
+                                                        $colores .= " {$color->nombre_color},";
+                                                    }
+
+                                                    $colores = trim($colores,",");
+                                                ?>
+                                                <td><?php if(!empty($colores)): ?> <?php echo e($colores); ?> <?php else: ?> Sin colores <?php endif; ?></td>
+                                                <?php
+                                                    $categorias = "";
+                                                    foreach ($producto->categorias as $categoria){
+                                                        $categorias .= " {$categoria->nombre_categoria},";
+                                                    }
+
+                                                $categorias = trim($categorias,",");
+                                                ?>
+                                                <td><?php if(!empty($categorias)): ?> <?php echo e($categorias); ?> <?php else: ?> Sin categorias <?php endif; ?></td>
+                                                <td><?php if(!empty($producto->imagenes)): ?> <a href="<?php echo e(route('productos-imagenes-admin',['id_producto' => $producto->id_producto])); ?>">Imagenes</a> <?php else: ?> Sin imagenes <?php endif; ?></td>
+                                                <td><?php if($producto->habilitado): ?> Si <?php else: ?> No <?php endif; ?></td>
+
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row input-group-sm">
+                                <div class="col-sm-5" style="margin-top: 8px;">
+                                    <?php /**/ $numero_registro_inicial = ($productos->perPage()*($productos->currentPage()-1))+1; /**/ ?>
+                                    <?php /**/ $numero_registro_final = ($productos->perPage()*($productos->currentPage()-1))+$productos->perPage(); /**/ ?>
+                                    <?php /**/ $numero_registro_final = $numero_registro_final>$productos->total()?$productos->total():$numero_registro_final; /**/ ?>
+                                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Mostrando <?php echo e($numero_registro_inicial); ?> a <?php echo e($numero_registro_final); ?> de <?php echo e($productos->total()); ?>  registros</div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate" style="float: right;">
+                                        <ul class="pagination">
+                                            <?php echo e($productos->links()); ?>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('privado.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

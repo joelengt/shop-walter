@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Sliders;
+use App\Modelos\SlidersImagenes;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+class SlidersImagenesControlador extends Controller
+{
+    public function SlidersImagenes(Request $request,$id_slider)
+    {
+        $imagenes = SlidersImagenes::where('id_slider',$id_slider)->paginate();
+        $slider = Sliders::find($id_slider);//dd($slider->imagenes);
+        return view("privado.slider-imagenes.lista-sliders-imagenes",compact(['slider','imagenes']));
+    }
+}

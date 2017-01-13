@@ -1,0 +1,20 @@
+<?php $__env->startSection('contenido'); ?>
+    <div class="general1">
+        <div class="container general2 quienessomos">
+            <div class="col-md-12 listado">
+                <h1>Privacidad y datos de navegación</h1>
+                <p>Zecat toma con mucha seriedad el respeto por la privacidad de nuestros visitantes.</p>
+                <p>Es importante que Ud. conozca con la mayor claridad la forma en que es obtenida, almacenada o procesada&nbsp;   cualquier información sobre nuestros usuarios relacionada a la navegación y uso de nuestro sitio web.-&nbsp;   Entendemos que al utilizar nuestro sitio, Ud. acepta esta política.-</p>
+                <p><strong>Medición y monitoreo del tráfico en nuestro sitio web</strong></p>
+                <p>Medimos el tráfico web de nuestro sitio con Google Analitycs. Google Analytics permite implementar funciones&nbsp;   de publicidad extendidas.</p>
+                <p>En&nbsp;<a href="http://zecat.com.ar/">Zecat.com.ar</a>&nbsp;implementamos las siguientes funciones de Google Analitycs</p>
+                <ul type="disc"><li>Remarketing</li>
+                    <li>Impresiones de la Red de Display de Google,</li>
+                    <li>Informes de datos demográficos e intereses.</li>
+                </ul><p>Cuya finalidad es utilizar señaladores e identificadores anónimos (cookies) con el objeto de mejorar&nbsp;   la orientación de los anuncios publicitarios que se le presentan a cada persona en otros sitios&nbsp;   adheridos a la Red de Display de Google de acuerdo a sus visitas anteriores en nuestro sitio web.</p>
+                <p>Entendemos que este mecanismo redunda en beneficio e interés de nuestros visitantes,&nbsp;   pero si Ud. prefiere no participar , de modo que su visita a nuestro sitio no sea medido por medio&nbsp;   de estos mecanismos , se le ofrece una serie de opciones para deshabilitarlos,&nbsp;   incluyendo la&nbsp;<strong><a href="http://www.google.com/settings/ads">configuración de anuncios de Google</a>&nbsp;</strong>y&nbsp;<a href="https://tools.google.com/dlpage/gaoptout/"><strong>herramienta de deshabilitación de Analytics</strong></a>&nbsp;ofrecida&nbsp;   por Google, que sirve para impedir por completo la colección de datos por Google Analytics.</p>
+                <p>Para saber más sobre cómo utiliza Google o sus asociados esta información, visite&nbsp;<a href="http://www.google.com/intl/es/policies/privacy/"><strong>Política de privacidad de Google</strong></a>.</p>    </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

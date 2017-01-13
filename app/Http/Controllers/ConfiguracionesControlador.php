@@ -1,0 +1,143 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Configuraciones;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use \Auth;
+use \Redirect;
+use Validator;
+
+class ConfiguracionesControlador extends Controller
+{
+    public function Configuraciones(Request $request)
+    {
+        $configuraciones = Configuraciones::paginate();
+
+        return view('privado.configuraciones.lista-configuraciones',compact(['configuraciones']));
+    }
+
+    public function EditarConfiguracion(Request $request,$id_configuracion)
+    {
+        $configuracion = Configuraciones::find($id_configuracion);
+        if($request->method() == 'GET') {
+            return view("privado.configuraciones.editar", compact(['configuracion']));
+        }elseif($request->method() == 'POST'){
+
+            $validator = Validator::make($request->all(), [
+                'etiqueta' => 'required|string',
+                'llave' => 'required|alpha_dash',
+                'valor' => 'required|string',
+                'imagen_configuracion' => 'file|image',
+                'habilitado' => 'required|in:0,1',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect(route('editar-configuracion',['id_configuracion' => $id_configuracion]))
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $datos = $request->all();
+            $archivo =  $request->file('imagen_configuracion');
+            $ruta_destino = 'imagenes/';
+
+            $configuracion->habilitado = $datos['habilitado'];
+            $configuracion->etiqueta = $datos['etiqueta'];
+            $configuracion->llave = $datos['llave'];
+            $configuracion->valor = $datos['valor'];
+
+            if(!empty($archivo) && $archivo->isValid())
+            {
+                $nombre_archivo =  str_replace(' ', '-', trim($archivo->getClientOriginalName()));
+                $archivo->move($ruta_destino, $nombre_archivo);
+
+                $imagen_configuracion = $configuracion->imagen;
+
+                if(!empty($imagen_configuracion)) {
+                    $imagen_configuracion->ruta = "$ruta_destino$nombre_archivo";
+
+                    $imagen_configuracion->save();
+                }else{
+                    $imagen_configuracion = new Imagenes();
+                    $imagen_configuracion->ruta = "$ruta_destino$nombre_archivo";
+
+                    $imagen_configuracion->save();
+
+                    $configuracion->id_imagen = $imagen_configuracion->id_imagen;
+                }
+
+                $configuracion->valor = $imagen_configuracion->ruta;
+            }
+
+            $configuracion->save();
+
+            return Redirect::to('/admin/configuraciones');
+        }
+    }
+
+    public function AgregarConfiguracion(Request $request)
+    {
+        if($request->method() == 'GET') {
+            return view("privado.configuraciones.agregar");
+        }elseif($request->method() == 'POST'){
+
+            $validator = Validator::make($request->all(), [
+                'etiqueta' => 'required|string',
+                'llave' => 'required|alpha_dash',
+                'valor' => 'required|string',
+                'imagen_configuracion' => 'file|image',
+                'habilitado' => 'required|in:0,1',
+            ]);
+
+            if ($validator->fails()) {
+
+                return redirect(route('agregar-configuracion'))
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $datos = $request->all();
+            $archivo =  $request->file('imagen_configuracion');
+            $ruta_destino = 'imagenes/';
+
+            $configuracion = new Configuraciones();
+
+            $configuracion->habilitado = $datos['habilitado'];
+            $configuracion->etiqueta = $datos['etiqueta'];
+            $configuracion->llave = $datos['llave'];
+            $configuracion->valor = $datos['valor'];
+
+            if(!empty($archivo) && $archivo->isValid())
+            {
+                $nombre_archivo =  str_replace(' ', '-', trim($archivo->getClientOriginalName()));
+                $archivo->move($ruta_destino, $nombre_archivo);
+
+                $imagen_configuracion = new Imagenes();
+                $imagen_configuracion->ruta = "$ruta_destino$nombre_archivo";
+
+                $imagen_configuracion->save();
+
+                $configuracion->id_imagen = $imagen_configuracion->id_imagen;
+                $configuracion->valor = $imagen_configuracion->ruta;
+            }
+
+            $configuracion->save();
+
+            return Redirect::to('/admin/configuraciones');
+        }
+    }
+
+    public function BorrarConfiguracion(Request $request,$id_configuracion)
+    {
+        if(Auth::check()){
+            $configuracion = Configuraciones::find($id_configuracion);
+
+            $configuracion->delete();
+        }
+
+        return Redirect::to('/admin/configuraciones');
+    }
+}

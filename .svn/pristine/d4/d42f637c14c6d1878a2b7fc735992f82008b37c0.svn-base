@@ -1,0 +1,88 @@
+<?php $__env->startSection('contenido'); ?>
+    <style>
+        .pagination {
+            margin: 5px 0;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Agregar carrusel</h3>
+                </div>
+                <form name="editar-carrusel" id="editar-carrusel" style="font-size: 11px;" class="form-horizontal" action="<?php echo e(route("agregar-carrusel-admin")); ?>" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                    <div class="box-body">
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="nombre_carrusel" class="col-md-4 control-label">Nombre carrusel:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="nombre_carrusel" name="nombre_carrusel" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="nombre_corto" class="col-md-4 control-label">Nombre corto:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="nombre_corto" name="nombre_corto" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_producto" class="col-md-2 control-label">Productos:</label>
+                            <div class="checkbox col-md-10">
+                                <?php foreach($productos as $producto): ?>
+                                    <label>
+                                        <input type="checkbox" name="id_producto[]" id="id_producto" value="<?php echo e($producto->id_producto); ?>" >
+                                        <?php echo e(PrimerasEnMayusculas($producto->nombre_producto)); ?>
+
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="orden" class="col-md-4 control-label">Orden:</label>
+                            <div class="col-md-8">
+                                <select class="form-control input-sm" name="orden" id="orden">
+                                    <?php for ($i=1;$i<=20;$i++): ?>
+                                    <option value="<?php echo e($i); ?>" ><?php echo e($i); ?></option>
+                                    <?php endfor;?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="habilitado" class="col-md-4 control-label">Habilitado:</label>
+                            <div class="col-md-8">
+                                <select class="form-control input-sm" name="habilitado" id="habilitado">
+                                    <option value="1" >Si</option>
+                                    <option value="0" >No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Grabar</button>
+                        <a class="btn btn-warning btn-close" href="<?php echo e(URL::previous()); ?>">Cancelar</a>
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+                <?php if(count($errors) > 0): ?>
+                <div class="alert alert-danger">
+                    <ul>
+                        <?php foreach($errors->all() as $error): ?>
+                            <li><?php echo e($error); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('privado.nueva-plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

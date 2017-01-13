@@ -1,0 +1,27 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+/*
+Route::get('/', function () {
+    return view('welcome');
+});
+*/
+
+Route::get('/',['uses' => 'TiendaControlador@Inicio','as' => 'inicio-publico']);
+Route::get('/productos/{categoria_padre}/{categoria_hija}/{producto}',['uses' => 'TiendaControlador@DetalleProducto','as' => 'detalle-producto-publico']);
+Route::get('/productos/{categoria_padre}/{categoria_hija}',['uses' => 'TiendaControlador@Categorias','as' => 'categorias-publico']);
+Route::match(['get','post'],'/admin/login',['uses' => 'LoginControlador@Login','as' => 'login-admin']);
+
+
+Route::get('/admin/categorias',['uses' => 'CategoriasControlador@Categorias','as' => 'categorias-admin']);
+Route::match(['get','post'],'/admin/categorias/editar/{id_categoria}',['uses' => 'CategoriasControlador@EditarCategorias','as' => 'editar-categorias-admin']);
+Route::match(['get','post'],'/admin/categorias/agregar',['uses' => 'CategoriasControlador@AgregarCategorias','as' => 'agregar-categorias-admin']);

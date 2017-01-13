@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Sliders;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use \Auth;
+use \Redirect;
+
+class SlidersControlador extends Controller
+{
+    public function Sliders()
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            $sliders = Sliders::paginate();
+
+            return view('privado.sliders.lista-sliders', compact(['sliders']));
+        }
+    }
+
+    public function EditarSlider(Request $request,$id_slider)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            $slider = Sliders::find($id_slider);
+
+            if ($request->method() == 'GET') {
+                return view('privado.sliders.editar-slider', compact(['slider']));
+            } elseif ($request->method() == 'POST') {
+                $datos = $request->only(['nombre_slider', 'habilitado']);
+
+                $slider->nombre_slider = $datos['nombre_slider'];
+                $slider->habilitado = $datos['habilitado'];
+
+                $slider->save();
+
+                return Redirect::to('admin/sliders');
+            }
+        }
+    }
+
+    public function AgregarSlider(Request $request)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            if ($request->method() == 'GET') {
+                return view('privado.sliders.agregar-slider');
+            } elseif ($request->method() == 'POST') {
+                $datos = $request->only(['nombre_slider', 'habilitado']);
+
+                $slider = new Sliders();
+
+                $slider->nombre_slider = $datos['nombre_slider'];
+                $slider->habilitado = $datos['habilitado'];
+
+                $slider->save();
+
+                return Redirect::to('admin/sliders');
+            }
+        }
+    }
+}

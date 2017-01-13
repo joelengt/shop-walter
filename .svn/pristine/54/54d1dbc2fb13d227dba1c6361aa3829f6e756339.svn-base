@@ -1,0 +1,10 @@
+[2016-12-26 15:37:03] local.ERROR: exception 'Symfony\Component\Console\Exception\CommandNotFoundException' with message 'Command "view" is not defined.
+
+Did you mean this?
+    view:clear' in /var/www/tienda_walter/vendor/symfony/console/Application.php:515
+Stack trace:
+#0 /var/www/tienda_walter/vendor/symfony/console/Application.php(183): Symfony\Component\Console\Application->find('view')
+#1 /var/www/tienda_walter/vendor/symfony/console/Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 /var/www/tienda_walter/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 /var/www/tienda_walter/artisan(36): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 {main}  

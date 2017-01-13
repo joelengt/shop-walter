@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Carruseles;
+use App\Modelos\Colores;
+use App\Modelos\Categorias;
+
+use App\Modelos\Productos;
+use App\Modelos\ProductosCategorias;
+use App\Modelos\Sliders;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+use Illuminate\Pagination\Paginator;
+
+class TiendaControlador extends Controller
+{
+    public function Inicio()
+    {
+        $carruseles = Carruseles::Activos()->get();
+        $sliders = Sliders::Activos()->get();
+
+        return view('publico.inicio',compact(['carruseles','sliders']));
+    }
+
+    public function DetalleProducto(Request $request,$categoria_padre,$categoria_hija,$producto)
+    {
+        $url_detalle = $request->url();
+        $producto = Productos::BuscarProductoSlug($categoria_padre,$categoria_hija,$producto)->with(['carruseles'])->first();
+        $principales = Categorias::CategoriasPrincipales()->with(['subcategorias'])->get();
+        $categoria_principal = Categorias::BuscarCategoriaPrincipal($categoria_padre)->first();
+        $subcategoria = Categorias::BuscarHijoSlug($categoria_hija,$categoria_principal->id_categoria)->first();
+        //dd($producto->imagenes);
+        if(empty($producto))
+            abort(404);
+
+        return view('publico.detalle-producto',compact(['producto','principales','categoria_principal','subcategoria','url_detalle']));
+    }
+
+    public function Categorias(Request $request,$categoria_principal,$subcategoria = NULL)
+    {
+        $categoria_principal = Categorias::BuscarPadreSlug($categoria_principal)->first();
+
+        $por_pagina = !empty($request->get('page_size'))?$request->get('page_size'):12;
+        $ordenar_por = !empty($request->get('sort_campo'))?$request->get('sort_campo'):'id_producto';
+        $ordenar_dir = !empty($request->get('sort_dir'))?$request->get('sort_dir'):'asc';
+        //dd($ordenar_por);
+        $resultados_por_pagina = ['12','24','Todo'];
+        $categoria = !empty($subcategoria)?Categorias::BuscarHijoSlug($subcategoria,$categoria_principal->id_categoria)->with(['productos'])->first():$categoria_principal;
+
+        $colores = Colores::Activas()->get();
+        $principales = Categorias::CategoriasPrincipales()->with('subcategorias')->get();
+
+        if(!empty($subcategoria))
+            $productos = $categoria->productos()->Activos()->orderBy($ordenar_por,$ordenar_dir)->paginate($por_pagina);
+        else{
+            $categorias = Categorias::Activas()->BuscarSubcategorias($categoria_principal->id_categoria)->select('id_categoria')->get()->toArray();
+            $codigos_productos = ProductosCategorias::whereIn('id_categoria',$categorias)->orderBy('id_producto')->select('id_producto')->get()->toArray();
+            $productos = Productos::Activos()->whereIn('id_producto',$codigos_productos)->orderBy($ordenar_por,$ordenar_dir)->paginate($por_pagina);
+        }
+
+        return view('publico.categorias',compact(['colores','categoria_principal','categoria','principales','productos','por_pagina','resultados_por_pagina','ordenar_por','ordenar_dir']));
+    }
+
+    public function LaEmpresa()
+    {
+
+    }
+
+    public function Contacto()
+    {
+
+    }
+
+    public function PreguntasFrecuentes()
+    {
+
+    }
+
+    public function Catalogos()
+    {
+
+    }
+
+    public function PrensaEventos()
+    {
+
+    }
+
+    public function ComoEfectuarPedido()
+    {
+        
+    }
+}

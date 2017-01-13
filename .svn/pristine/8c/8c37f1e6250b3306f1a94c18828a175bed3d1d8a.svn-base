@@ -1,0 +1,339 @@
+<?php $__env->startSection('titulo navegador'); ?><?php echo e($producto->nombre_producto); ?><?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('facebook_title'); ?><?php echo e($producto->nombre_producto); ?><?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('facebook_descripcion'); ?><?php echo e($producto->descripcion); ?><?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('facebook_imagen'); ?><?php echo e(asset($producto->imagenes[0]->ruta_imagen)); ?><?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('facebook_url'); ?><?php echo e(asset($url_detalle)); ?><?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('contenido'); ?>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#add_to_quotation_button").click(function () {
+
+                var ele = $(this);
+                if (!checkMinOrderQuantity()) {
+                    return false;
+                }
+
+                ele.addClass('loader-background').prop('disabled', true);
+                $.ajax({
+                    url: $('#add_to_quotation_form').attr('action'),
+                    data: $('#add_to_quotation_form').serialize(),
+                    type: 'post',
+                    cache: false,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#quotation_add_ok_message').hide();
+                        $('#quotation_add_no_message').show();
+                        showPopup('addQuotationProduct');
+                    },
+                    success: function (data) {
+                        global_has_loaded_products = 1;
+                        $('#actualQuotationResume').html(data);
+                        $('#quotation_add_ok_message').show();
+                        $('#quotation_add_no_message').hide();
+                        showPopup('addQuotationProduct');
+                    },
+                    complete: function () {
+                        ele.removeClass('loader-background').prop('disabled', false);
+                    }
+                });
+                return false;
+            });
+        });
+
+        function checkMinOrderQuantity() {
+            var cantidad = $('#order_quantity');
+            if (isNaN(cantidad.val()) || parseInt(cantidad.val()) < 1 || parseInt(cantidad.val()) < parseInt(cantidad.attr('rel'))) {
+                cantidad.qtip({
+                    content: cantidad.attr('min_error'), // Set the tooltip content to the current corner
+                    position: {
+                        corner: {
+                            tooltip: 'bottomRight', // Use the corner...
+                            target: 'topLeft' // ...and opposite corner
+                        }
+                    },
+                    show: {
+                        when: false, // Don't specify a show event
+                        ready: true // Show the tooltip when ready
+                    },
+
+                    hide: {
+                        delay: 500
+                    }, // Don't specify a hide event
+                    style: {
+                        border: {
+                            width: 5,
+                            radius: 10
+                        },
+                        padding: 10,
+                        textAlign: 'center',
+                        tip: true, // Give it a speech bubble tip with automatic corner detection
+                        name: 'cream' // Style it according to the preset 'cream' style
+                    }
+                });
+                cantidad.val(cantidad.attr('rel'));
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
+    <div class="general1">
+
+
+        <div class="container general2">
+
+            <div class="col-md-12 ficha">
+
+                <!-- RUTA ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                <div class="col-md-12 ruta">
+                    <a href="">Productos</a> &gt;
+                    <a href="<?php echo e(asset("productos/{$categoria_principal->slug}")); ?>"><?php echo e($categoria_principal->nombre_categoria); ?></a> &gt;
+                    <a href="<?php echo e(asset("productos/{$categoria_principal->slug}/{$subcategoria->slug}")); ?>"><?php echo e($subcategoria->nombre_categoria); ?></a>
+                </div>
+                <!-- RUTA ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+                <div class="col-md-12 contenido">
+                    <!-- IMAGENES -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="fotorama col-md-6" data-arrows="always" data-allowfullscreen="native" data-autoplay="true" data-click="true" data-swipe="false" data-nav="thumbs">
+                        <?php foreach($producto->imagenes as $imagen): ?>
+                        <img src="<?php echo e(asset($imagen->ruta_imagen)); ?>" title="<?php echo e($producto->nombre_producto); ?>" alt="<?php echo e($producto->nombre_producto); ?>">
+                        <?php endforeach; ?>
+
+                    </div>
+                    <!-- IMAGENES -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!-- DESCRIPCION ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="col-md-6 datos">
+                        <h1><?php echo e($producto->nombre_producto); ?></h1>
+                        <div class="novedadProd">
+                            <?php foreach($producto->carruseles as $carrusel): ?>
+                            <a href=""><?php echo e($carrusel->nombre_corto); ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                        <p><?php echo e($producto->descripcion); ?></p>
+
+                        <div class="iconos">
+                            <?php $__empty_1 = true; foreach($producto->especificaciones as $especificacion): $__empty_1 = false; ?>
+                            <img src="<?php echo e(asset($especificacion->imagen->ruta_imagen)); ?>" alt="<?php echo e($especificacion->nombre_especificacion); ?>" title="<?php echo e($especificacion->nombre_especificacion); ?>">
+                            <?php endforeach; ?>
+                        </div>
+
+                        <p>Colores disponibles: </p>
+                        <ul class="color_picker" id="color_picker">
+                            <?php foreach($producto->colores as $color): ?>
+                            <li>
+                                <a style="background: <?php echo e($color->codigo_color); ?>; border:2px solid <?php echo e($color->codigo_color); ?>;" title="<?php echo e($color->nombre_color); ?>"></a>
+                            </li>
+                            <?php endforeach; ?>
+
+                            <div class="clear"></div>
+                        </ul>
+
+                        <form class="add" id="add_to_quotation_form" action="<?php echo e(route('agregar-producto-cotizacion')); ?>" method="post">
+                            <input type="hidden" name="id_producto" value="<?php echo e($producto->id_producto); ?>">
+                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                            <div class="form-group col-md-6">
+                                <label for="order_quantity">Cantidad</label>
+                                <input name="order_quantity" id="order_quantity" min_error="Hay un mínimo de <?php echo e($producto->stock); ?> unidades" rel="1" value="1" size="4" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="order_colors">Color</label>
+                                <select name="order_colors" id="order_colors" class="form-control">
+                                    <?php foreach($producto->colores as $color): ?>
+                                    <option value="<?php echo e($color->id_color); ?>"><?php echo e($color->nombre_color); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div style="display:inline-block;">
+                                <button id="add_to_quotation_button" name="add_to_quotation_button">Pedir cotización</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- DESCRIPCION ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="fb-share-button" data-href="<?php echo e($url_detalle); ?>" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+                        <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a>
+                    </div>
+                    <!--
+                    <span><a name="fb_share" type="button_count">Compartir en FB</a> </span>
+                    <div><span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1469820565243_0"><a id="li_ui_li_gen_1469820565243_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1469820565243_0-logo">in</span><span id="li_ui_li_gen_1469820565243_0-title"><span id="li_ui_li_gen_1469820565243_0-mark"></span><span id="li_ui_li_gen_1469820565243_0-title-text">Compartir</span></span></a></span></span><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1469820565256_1-container" class="IN-right IN-hidden"><span id="li_ui_li_gen_1469820565256_1" class="IN-right"><span id="li_ui_li_gen_1469820565256_1-inner" class="IN-right"><span id="li_ui_li_gen_1469820565256_1-content" class="IN-right">0</span></span></span></span></span></span><script type="IN/Share+init" data-counter="right"></script></div>
+                    -->
+                </div>
+
+                <!-- INFO EXTENDIDA -------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <div class="popup popups" id="photosModal" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tbody><tr class="top">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="middle">
+                            <td class="left"></td>
+                            <td class="center">
+                                <div class="popup_content">
+                                    <div class="left">
+                                        <h1><?php echo e($producto->nombre_producto); ?></h1>
+                                    </div>
+                                    <a class="close_simple_btn_big right" href="javascript:closePopup('photosModal')"></a>
+                                    <div class="clear"></div>
+                                    <div id="pop_up_main_image" class="left product">
+                                        <img class="img-responsive" src="<?php echo e(asset('/img/products/5be27c619f83daaad045d7b589172aa898bd170b.jpg')); ?>" border="0" alt="Pendrive Slim (usb / micro usb)">
+                                    </div>
+                                    <div class="left info">
+                                        <h5>Imágenes del Producto</h5>
+                                        <ul id="image_thumbs" class="thumbs">
+                                            <li><a href="#" title="Pendrive Slim (usb / micro usb)"><img src="<?php echo e(asset('/img/products/5be27c619f83daaad045d7b589172aa898bd170b.jpg')); ?>" height="100" border="0" alt="Pendrive Slim (usb / micro usb)"></a></li>
+                                            <li><a href="#" title="Pendrive Slim (usb / micro usb)"><img src="<?php echo e(asset('/img/products/2f07234047a2e7691549b5540c959cc45ec4b198.jpg')); ?>" height="100" border="0" alt="Pendrive Slim (usb / micro usb)"></a></li>
+                                            <li><a href="#" title="Pendrive Slim (usb / micro usb)"><img src="<?php echo e(asset('/img/products/ddb922d3cdd42e0fb8f29c2d8869bb6e45e6fff8.jpg')); ?>" height="100" border="0" alt="Pendrive Slim (usb / micro usb)"></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="bottom">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        </tbody></table>
+                </div>
+
+
+                <div class="popup popups" id="areaImprimible" style="display:none;">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tbody><tr class="top">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="middle">
+                            <td class="left"></td>
+                            <td class="center">
+                                <div class="popup_content">
+                                    <div class="left">
+                                        <h1>Área de impresión</h1>
+                                    </div>
+                                    <a class="close_simple_btn_big right" href="javascript:closePopup('areaImprimible')"></a>
+                                    <div class="clear"></div>
+                                    <div class="left product"><img src="<?php echo e(asset('/img/products/2f593f223d85a61b4c8c834b374538eb707b2719.jpg')); ?>"></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </td>
+                            <td class="right"></td>
+                        </tr>
+                        <tr class="bottom">
+                            <td class="left"></td>
+                            <td class="center"></td>
+                            <td class="right"></td>
+                        </tr>
+                        </tbody></table>
+                </div>
+
+                <!-- INFO EXTENDIDA -------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <!-- Formulario de Contacto -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <div class="col-md-12 contenido">
+                    <h3 class="left">Formulario de Consultas</h3>
+                    <div class="destacados">
+                        <form class="gen_form form-horizontal" action="<?php echo e(route('enviar-consulta-productos')); ?>" method="post" id="form_contacto">
+                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Nombre<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[first_name]" class="form-control" id="productos_first_name">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Apellido<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[last_name]" class="form-control" id="productos_last_name">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Email<span class="red">*</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[email]" class="form-control" id="productos_email">                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Teléfono</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[contact_phone]" class="form-control" id="productos_contact_phone">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Producto</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="productos[product_name]" value="<?php echo e($producto->nombre_producto); ?>" class="form-control" readonly="1" id="productos_product_name">                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Consulta</label>
+                                    <div class="col-sm-8">
+                                        <textarea rows="4" cols="30" name="productos[message]" class="form-control" id="productos_message"></textarea>                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group align">
+                                    <button type="submit" onclick="contacto();" class="enviarConsulta">Enviar</button>
+                                </div>
+                                <input type="hidden" name="productos[_csrf_token]" value="b35d7c07dcd9006a6cc3fc1c981e316d" id="productos__csrf_token">                        </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Formulario de Contacto -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <!-- PRODUCTO RELACIONADO -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <div class="col-md-12 contenido">
+                    <h3 class="left">Productos relacionados</h3>
+                    <div class="destacados">
+                        <div class="destacado">
+                            <a href="/AR/es/products/tecnologia/computacion/boligrafo-pendrive-nakar-kingtech" title="Bolígrafo Pendrive Nakar - Kingtech">
+                                <div class="img"><img src="<?php echo e(asset('/img/products/Bol-Pen-Drive-Nakar-3.jpg')); ?>" alt="Bolígrafo Pendrive Nakar - Kingtech" class="img-responsive"></div>
+                                <div class="title">Bolígrafo Pend...</div>
+                            </a>
+                        </div>
+                        <div class="destacado">
+                            <a href="/AR/es/products/boligrafos/plasticos/new-galaxy" title="New Galaxy">
+                                <div class="img"><img src="<?php echo e(asset('/img/products/533e55898712ce64cc88d1a04646141ecc6fcde1.jpg')); ?>" alt="New Galaxy" class="img-responsive"></div>
+                                <div class="title">New Galaxy</div>
+                            </a>
+                        </div>
+                        <div class="destacado">
+                            <a href="/AR/es/products/paraguas/todos-2/paraguas-street-pg-006" title="Paraguas Street - PG 006">
+                                <div class="img"><img src="<?php echo e(asset('/img/products/eb8c1073287551aa26c0de3bfe6fd0bed5a06543.jpg')); ?>" alt="Paraguas Street - PG 006" class="img-responsive"></div>
+                                <div class="title">Paraguas Street...</div>
+                            </a>
+                        </div>
+                        <div class="destacado">
+                            <a href="/AR/es/products/escritorio/libreria/porta-notas-adhesivas" title="Porta Notas Adhesivas">
+                                <div class="img"><img src="<?php echo e(asset('/img/products/2674036bd19c925d497e770d2f4c6b77734a9dce.jpg')); ?>" alt="Porta Notas Adhesivas" class="img-responsive"></div>
+                                <div class="title">Porta Notas Adh...</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- PRODUCTO RELACIONADO -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <!-- PRODUCTO PRECIO SIMILAR ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                <!-- PRODUCTO PRECIO SIMILAR ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

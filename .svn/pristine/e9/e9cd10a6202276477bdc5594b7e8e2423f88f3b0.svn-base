@@ -1,0 +1,126 @@
+<?php $__env->startSection('contenido'); ?>
+    <style>
+        .pagination {
+            margin: 5px 0;
+        }
+    </style>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Agregar producto</h3>
+                </div>
+                <form name="editar-producto" id="editar-producto" style="font-size: 11px;" class="form-horizontal" action="<?php echo e(route("agregar-producto-admin")); ?>" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                    <div class="box-body">
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="nombre_producto" class="col-md-2 control-label">Nombre producto:</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control input-sm" id="nombre_producto" name="nombre_producto" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="descripcion" class="col-md-2 control-label">Descripci&oacute;n:</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control input-sm" id="descripcion" name="descripcion" style="height: 150px;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="stock" class="col-md-4 control-label">Stock:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="stock" name="stock" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="precio" class="col-md-4 control-label">Precio:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="precio" name="precio" value="0.0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_color" class="col-md-2 control-label">Colores:</label>
+                            <div class="checkbox col-md-10">
+                                <?php foreach($colores as $color): ?>
+                                    <label>
+                                        <input type="checkbox" name="id_color[]" id="id_color" value="<?php echo e($color->id_color); ?>">
+                                        <?php echo e($color->nombre_color); ?>
+
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_especificacion" class="col-md-2 control-label">Especificaciones:</label>
+                            <div class="checkbox col-md-10">
+                                <?php foreach($especificaciones as $especificacion): ?>
+                                    <label>
+                                        <input type="checkbox" name="id_especificacion[]" id="id_especificacion" value="<?php echo e($especificacion->id_especificacion); ?>">
+                                        <?php echo e(PrimerasEnMayusculas($especificacion->nombre_especificacion)); ?>
+
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_categoria" class="col-md-2 control-label">Categorias:</label>
+                            <div class="checkbox col-md-10">
+                                <?php foreach($subcategorias as $subcategoria): ?>
+                                    <label>
+                                        <input type="checkbox" id="id_categoria" name="id_categoria[]" value="<?php echo e($subcategoria->id_categoria); ?>">
+                                        <?php echo e($subcategoria->nombre_categoria); ?>
+
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 input-group-sm">
+                            <label for="id_carrusel" class="col-md-2 control-label">Carruseles:</label>
+                            <div class="checkbox col-md-10">
+                                <?php foreach($carruseles as $carrusel): ?>
+                                    <label>
+                                        <input type="checkbox" name="id_carrusel[]" id="id_carrusel" value="<?php echo e($carrusel->id_carrusel); ?>">
+                                        <?php echo e(PrimerasEnMayusculas($carrusel->nombre_carrusel)); ?>
+
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="fecha_publicacion" class="col-md-4 control-label">Fecha publicaci&oacute;n:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm" id="fecha_publicacion" name="fecha_publicacion" value="<?php echo e(date('Y-m-d')); ?>" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-6 input-group-sm">
+                            <label for="habilitado" class="col-md-4 control-label">Habilitado:</label>
+                            <div class="col-md-8">
+                                <select class="form-control input-sm" name="habilitado" id="habilitado">
+                                    <option value="1">Si</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Grabar</button>
+                        <a class="btn btn-warning btn-close" href="<?php echo e(URL::previous()); ?>">Cancelar</a>
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('privado.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

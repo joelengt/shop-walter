@@ -1,0 +1,138 @@
+<?php $__env->startSection('contenido'); ?>
+
+    <script>
+        $(function () {
+            $('#sort_on_select').change(function () {
+                        $('#mainList').fadeTo('fast', .3);
+                        window.location.href = '<?php echo e(asset('/')); ?>'+$('#sort_on_select').val();
+                    }
+            );
+
+            $(".add_to_cart_link").click(function () {
+
+                var ele = $(this);
+                ele.addClass('loader-background').prop('disabled', true);
+
+                $.ajax({
+                    url: ele.attr('href'),
+                    data: {id_producto: ele.attr('rel'),_token:"<?php echo e(csrf_token()); ?>"},
+                    type: 'post',
+                    cache: false,
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+                        $('#quotation_add_ok_message').hide();
+                        $('#quotation_add_no_message').show();
+                        showPopup('addQuotationProduct');
+                    },
+                    success: function (data) {
+                        global_has_loaded_products = 1;
+                        $('#actualQuotationResume').html(data);
+                        $('#quotation_add_ok_message').show();
+                        $('#quotation_add_no_message').hide();
+                        showPopup('addQuotationProduct');
+                    },
+                    complete: function () {
+                        ele.removeClass('loader-background').prop('disabled', false);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+
+    <?php if(!empty($categoria_principal) || !empty($subcategoria)): ?>
+    <?php
+
+        $imagen =  isset($subcategoria->imagen_principal)?$subcategoria->imagen_principal:$categoria_principal->imagen_principal;
+    ?>
+    <?php if(isset($imagen->ruta_imagen)): ?>
+    <div class="bannerCat1">
+        <div class="container_category_banner bannerCat2">
+            <img src="<?php echo e(asset($imagen->ruta_imagen)); ?>">    </div>
+    </div>
+    <?php endif; ?>
+    <?php endif; ?>
+    <div class="general1">
+        <div class="container general2">
+
+            <div class="col-md-12 listado">
+
+                <div id="filters_tags">
+                </div>
+
+                <div class="col-md-12 mostrar">
+                    <?php /**/ $numero_registro_inicial = ($productos->perPage()*($productos->currentPage()-1))+1; /**/ ?>
+                    <?php /**/ $numero_registro_final = ($productos->perPage()*($productos->currentPage()-1))+$productos->perPage(); /**/ ?>
+                    <?php /**/ $numero_registro_final = $numero_registro_final>$productos->total()?$productos->total():$numero_registro_final; /**/ ?>
+
+                    <div class="col-md-4">
+                        Mostrando: <?php echo e($numero_registro_inicial); ?> - <?php echo e($numero_registro_final); ?> de <?php echo e($productos->total()); ?>    </div>
+                    <div class="col-md-4">
+                        Mostrar:
+                        <?php foreach($resultados_por_pagina as $cantidad): ?>
+                            <?php if($cantidad == $por_pagina): ?>
+                                <?php echo e($cantidad); ?>,
+                            <?php else: ?>
+                                <a href="<?php echo e(asset($categoria->UrlCategoria())); ?>?page_size=<?php echo e($cantidad); ?>"><?php echo e($cantidad); ?></a>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                    </div>
+                    <div class="col-md-4">
+                        Ordenar por
+                        <select id="sort_on_select" class="sort_on form-control">
+                            <option value="<?php echo e($categoria->UrlCategoria()); ?>?sort_campo=nombre_producto&sort_dir=asc&page_size<?php echo e($por_pagina); ?>" <?php if($ordenar_por=='nombre_producto' && $ordenar_dir=='asc'): ?> selected <?php endif; ?>>Nombre ascendente</option>
+                            <option value="<?php echo e($categoria->UrlCategoria()); ?>?sort_campo=nombre_producto&sort_dir=desc&page_size<?php echo e($por_pagina); ?>" <?php if($ordenar_por=='nombre_producto' && $ordenar_dir=='desc'): ?> selected <?php endif; ?>>Nombre descendente</option>
+
+                            <option value="<?php echo e($categoria->UrlCategoria()); ?>?sort_campo=precio&sort_dir=asc&page_size=<?php echo e($por_pagina); ?>" <?php if($ordenar_por=='precio' && $ordenar_dir=='asc'): ?> selected <?php endif; ?>>Precio: menor a mayor</option>
+                            <option value="<?php echo e($categoria->UrlCategoria()); ?>?sort_campo=precio&sort_dir=desc&page_size=<?php echo e($por_pagina); ?>" <?php if($ordenar_por=='precio' && $ordenar_dir=='desc'): ?> selected <?php endif; ?>>Precio: mayor a menor</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="mainList">
+                    <form action="/AR/es/products/compare" method="get" id="compare_form" target="_compare">
+                        <div class="compares_div">
+                            <a href="/AR/es/products/compare">Comparar Productos Seleccionados</a>
+                        </div>
+                        <div class="destacados">
+                            <?php foreach($productos as $producto): ?>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="<?php echo e(asset($producto->GetUrlDetalleProducto())); ?>" class="image" title="<?php echo e($producto->nombre_producto); ?>">
+                                        <img class="ímage" alt="<?php echo e($producto->nombre_producto); ?>" height="102" src="<?php echo e(asset($producto->imagenes[0]->ruta_imagen)); ?>">
+                                    </a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="<?php echo e(asset($producto->GetUrlDetalleProducto())); ?>" title="Stark"><?php echo e($producto->nombre_producto); ?></a>
+                                    </h2>
+                                </div>
+
+                                <a class="add_to_cart_link boton" href="<?php echo e(route('agregar-producto-cotizacion')); ?>" rel="<?php echo e($producto->id_producto); ?>" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="paginacion">
+                    <div class="col-md-6">
+                        <p>Mostrando <?php echo e($numero_registro_inicial); ?> - <?php echo e($numero_registro_final); ?> de <?php echo e($productos->total()); ?> Productos</p>
+                    </div>
+                    <div class="col-md-6">
+                        <?php //dd($productos)?>
+                        <ul>
+                            <?php for($pagina=1;$pagina<=$productos->lastPage();$pagina++): ?>
+                            <li><a class="selected" href="<?php echo e(asset($categoria->UrlCategoria())); ?>?page_size=<?php echo e($por_pagina); ?>&amp;page=<?php echo e($pagina); ?>"><?php echo e($pagina); ?></a></li>
+                            <?php endfor; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

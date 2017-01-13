@@ -1,0 +1,93 @@
+@extends('privado.plantilla-principal')
+
+@section('contenido')
+    <style>
+        .pagination {
+            margin: 5px 0;
+        }
+    </style>
+
+    <script>
+        function AgregarCategoria()
+        {
+            location.href = "{{ route('agregar-categorias-admin') }}"
+        }
+
+        function EditarCategoria(codigo)
+        {
+            location.href = "{{ route('editar-categorias-admin',['id_categoria'=>'']) }}/" + codigo;
+        }
+    </script>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border bg-light-blue">
+                    <h3 class="box-title">Categorias registradass</h3>
+                </div>
+
+                <div class="box-body">
+
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row" style="margin: 1px;font-size: 11px;">
+                                <div class="col-sm-12 table-responsive">
+                                    <table id="example2" class="table table-bordered table-hover table-condensed table-striped" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                        <tr role="row" class="bg-light-blue">
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=""></th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Codigo</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Categoria padre</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Nombre categoria</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Slug</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Orden</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Habilitado</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Imagen</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($categorias as $categoria)
+                                            <tr role="row" class="odd">
+                                                <td><i class="fa fa-edit" title="Editar Registro" onclick="EditarCategoria({{ $categoria->id_categoria }})"></i> <i class="fa fa-plus" title="Nuevo Registro" onclick="AgregarCategoria()"></i></td>
+
+                                                <td>{{ $categoria->id_categoria }}</td>
+                                                <td>{{ $categoria->padre->nombre_categoria or 'Categoria principal' }}</td>
+                                                <td>{{ $categoria->nombre_categoria }}</td>
+                                                <td>{{ $categoria->slug }}</td>
+                                                <td>{{ $categoria->orden }}</td>
+                                                <td>{{ $categoria->habilitado?'Si':'No' }}</td>
+                                                <td>{{ $categoria->id_imagen }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row input-group-sm">
+                                <div class="col-sm-5" style="margin-top: 8px;">
+                                    {{--*/ $numero_registro_inicial = ($categorias->perPage()*($categorias->currentPage()-1))+1; /*--}}
+                                    {{--*/ $numero_registro_final = ($categorias->perPage()*($categorias->currentPage()-1))+$categorias->perPage(); /*--}}
+                                    {{--*/ $numero_registro_final = $numero_registro_final>$categorias->total()?$categorias->total():$numero_registro_final; /*--}}
+                                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Mostrando {{ $numero_registro_inicial }} a {{ $numero_registro_final }} de {{ $categorias->total() }}  registros</div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate" style="float: right;">
+                                        <ul class="pagination">
+                                            {{ $categorias->links() }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+@endsection

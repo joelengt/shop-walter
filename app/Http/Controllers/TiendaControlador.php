@@ -1,0 +1,265 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Carruseles;
+use App\Modelos\Colores;
+use App\Modelos\Categorias;
+
+use App\Modelos\Productos;
+use App\Modelos\ProductosCategorias;
+use App\Modelos\Sliders;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+use Illuminate\Pagination\Paginator;
+use League\Flysystem\Config;
+use \Redirect;
+use \Mail;
+
+class TiendaControlador extends Controller
+{
+    /**
+     * Carga la pagina de inicio de la parte publica.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function Inicio()
+    {
+        $carruseles = Carruseles::Activos()->get();
+        $sliders = Sliders::Activos()->get();
+
+        return view('publico.inicio',compact(['carruseles','sliders']));
+    }
+
+    public function EnviarCotizacion(Request $request)
+    {
+        $productos_cotizacion = $request->session()->get('productos.cotizacion');
+        $id_produtos = [];
+        $productos = [];
+
+        if(!empty($productos_cotizacion)) {
+            foreach ($productos_cotizacion as $id => $item) {
+                $id_produtos[] = $id;
+            }
+
+            $productos = Productos::whereIn('id_producto', $id_produtos)->Activos()->get();
+        }
+
+        if($request->method()=='GET'){
+            return view('publico.enviar-cotizacion',compact(['productos_cotizacion','productos']));
+        }elseif ($request->method()=='POST'){
+            $datos_contacto = $request->get('z_catalog_user_quotation');
+            //dd( $datos_contacto);
+
+            Mail::send('publico.correo.enviar-cotizacion', ['productos' => $productos,'productos_cotizacion'=>$productos_cotizacion,'datos_contacto'=>$datos_contacto], function ($message) use ($datos_contacto) {
+
+                $message->from('nadla20xx@gmail.com', 'Miguel Villanueva');
+                $message->to($datos_contacto['email']);
+                //$message->to("nadla20xx@gmail.com");
+                //$message->to($producto['email']);
+
+                $message->subject("Solicitud de cotización  - Pagina Web ");
+            });
+
+            $mensaje = "Cotización enviada, esperar pronta respuesta.";
+
+            return view('publico.finalizacion-tarea',compact(['mensaje']));
+        }
+    }
+
+    public function VaciarCotizacion(Request $request)
+    {
+        $request->session()->forget('productos.cotizacion');
+
+        $request->session()->flush();
+
+        return Redirect::to('/cotizacion');
+    }
+
+    /**
+     * Muesta los productos a cotizar.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function Cotizacion(Request $request)
+    {
+        $productos_cotizacion = $request->session()->get('productos.cotizacion');
+        $productos = [];
+
+        if($request->method() == "POST"){
+            $colores = $request->get('colors');
+            $cantidades = $request->get('item_quantity');
+            $eliminar = $request->get('delete');
+
+            foreach ($colores as $id_producto => $color){
+                $productos_cotizacion[$id_producto]['color'] = $color;
+            }
+
+            foreach ($cantidades as $id_producto => $cantidad){
+                $productos_cotizacion[$id_producto]['cantidad'] = $cantidad;
+            }
+
+            foreach ($eliminar as $id_producto => $bandera){
+                if($bandera=="true")
+                {
+                    unset($productos_cotizacion[$id_producto]);
+                }
+            }
+
+            $request->session()->put('productos.cotizacion', $productos_cotizacion);
+        }
+
+        $id_produtos = [];
+
+        if(!empty($productos_cotizacion)) {
+            foreach ($productos_cotizacion as $id => $item) {
+                $id_produtos[] = $id;
+            }
+
+            $productos = Productos::whereIn('id_producto', $id_produtos)->Activos()->get();
+        }
+
+        return view('publico.cotizacion',compact(['productos','productos_cotizacion']));
+    }
+
+    /**
+     *
+     *
+     * @param Request $request
+     */
+    public function AgregarProductoCotizacion(Request $request)
+    {
+        $productos_cotizacion = $request->session()->get('productos.cotizacion');
+
+        $cantidad = $request->get('order_quantity');
+        $id_producto = $request->get('id_producto');
+        $id_color = $request->get('order_colors');
+
+        $productos_cotizacion[$id_producto]['cantidad'] = $cantidad;
+        $productos_cotizacion[$id_producto]['color'] = $id_color;
+        //dd($productos_cotizacion);
+        $request->session()->put('productos.cotizacion', $productos_cotizacion);
+    }
+
+    /**
+     * Muesta la informacion publica del producto.
+     *
+     * @param Request $request
+     * @param $categoria_padre
+     * @param $categoria_hija
+     * @param $producto
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function DetalleProducto(Request $request,$categoria_padre,$categoria_hija,$producto)
+    {
+        $producto = Productos::BuscarProductoSlug($categoria_padre,$categoria_hija,$producto)->with(['carruseles'])->first();
+
+        if(!$producto->habilitado || $producto->fecha_publicacion>date('Y-m-d'))
+            abort(404);
+
+        $url_detalle = $request->url();
+        $principales = Categorias::CategoriasPrincipales()->with(['subcategorias'])->get();
+        $categoria_principal = Categorias::BuscarCategoriaPrincipal($categoria_padre)->first();
+        $subcategoria = Categorias::BuscarHijoSlug($categoria_hija,$categoria_principal->id_categoria)->first();
+
+        if(empty($producto))
+            abort(404);
+
+        return view('publico.detalle-producto',compact(['producto','principales','categoria_principal','subcategoria','url_detalle']));
+    }
+
+    public function Categorias(Request $request,$categoria_principal,$subcategoria = NULL)
+    {
+        $categoria_principal = Categorias::BuscarPadreSlug($categoria_principal)->doesntHave('padre')->first();
+
+        $resultados_por_pagina = config('tienda.paginador_productos');
+
+        $por_pagina = !empty($request->get('page_size'))?$request->get('page_size'):$resultados_por_pagina[0];
+        $por_pagina = is_numeric($por_pagina)?$por_pagina:1000;
+
+        $ordenar_por = !empty($request->get('sort_campo'))?$request->get('sort_campo'):'id_producto';
+        $ordenar_dir = !empty($request->get('sort_dir'))?$request->get('sort_dir'):'asc';
+
+        $categoria = !empty($subcategoria)?Categorias::BuscarHijoSlug($subcategoria,$categoria_principal->id_categoria)->with(['productos'])->first():$categoria_principal;
+
+        $colores = Colores::Activas()->get();
+        $principales = Categorias::CategoriasPrincipales()->with('subcategorias')->get();
+
+        if(!empty($subcategoria))
+            $productos = $categoria->productos()->Publicar()->Activos()->has('imagenes')->orderBy($ordenar_por,$ordenar_dir)->paginate($por_pagina);
+        else{
+            $categorias = Categorias::Activas()->BuscarSubcategorias($categoria_principal->id_categoria)->select('id_categoria')->get()->toArray();
+            $codigos_productos = ProductosCategorias::whereIn('id_categoria',$categorias)->orderBy('id_producto')->select('id_producto')->get()->toArray();
+            $productos = Productos::Publicar()->Activos()->has('imagenes')->whereIn('id_producto',$codigos_productos)->orderBy($ordenar_por,$ordenar_dir)->paginate($por_pagina);
+        }
+        return view('publico.categorias',compact(['colores','categoria_principal','categoria','principales','productos','por_pagina','resultados_por_pagina','ordenar_por','ordenar_dir']));
+    }
+
+    public function LaEmpresa()
+    {
+        return view('publico.la-empresa');
+    }
+
+    public function Contacto(Request $request)
+    {
+        if($request->method() == "GET") {
+            return view('publico.contactenos');
+        }elseif ($request->method() == "POST"){
+            $datos = $request->all();
+
+            Mail::send('publico.correo.contactenos', ['datos' => $datos], function ($message) use ($datos) {
+
+                $message->from('nadla20xx@gmail.com', 'Miguel Villanueva');
+                $message->to($datos['email']);
+
+                $message->subject("Solicitud de contacto  - Pagina Web ");
+            });
+
+            $mensaje = "Solicitud enviada, espere pronta respuesta";
+
+            return view('publico.finalizacion-tarea',compact(['mensaje']));
+        }
+    }
+
+    public function PreguntasFrecuentes()
+    {
+        return view('publico.preguntas-frecuentes');
+    }
+
+    public function Catalogos()
+    {
+        return view('publico.catalogos');
+    }
+
+    public function PrensaEventos()
+    {
+        return view('publico.prensa-y-eventos');
+    }
+
+    public function ComoEfectuarPedido()
+    {
+        return view('publico.como-efectuar-pedido');
+    }
+
+    public function QuienesSomos()
+    {
+        return view('publico.quienes-somos');
+    }
+
+    public function TerminosCondiciones()
+    {
+        return view('publico.terminos-y-condiciones');
+    }
+
+    public function Clientes()
+    {
+        return view('publico.clientes');
+    }
+
+    public function ListaPrecios()
+    {
+        return view('publico.lista-precios');
+    }
+}

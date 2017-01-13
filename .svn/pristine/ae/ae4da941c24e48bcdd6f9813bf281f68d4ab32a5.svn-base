@@ -1,0 +1,109 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Imagenes;
+use App\Modelos\Productos;
+use App\Modelos\ProductosImagenes;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use \Auth;
+use \Redirect;
+use \DB;
+
+class ProductosImagenesControlador extends Controller
+{
+    public function ProductosImagenes(Request $request,$id_producto)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            $producto = Productos::find($id_producto);
+
+            return view('privado.productos-imagenes.lista-productos-imagenes', compact(['producto']));
+        }
+    }
+
+    public function EditarProductoImagen(Request $request,$id_producto,$id_imagen)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            $imagen = Imagenes::find($id_imagen);
+
+            if ($request->method() == 'GET') {
+                return view("privado.productos-imagenes.editar-producto-imagen", compact(['imagen','id_producto']));
+            } elseif ($request->method() == 'POST') {
+                $datos = $request->only(['habilitado']);
+
+                $imagen_producto = $request->file('imagen_producto');
+                $ruta_destino = 'productos/';
+
+                if (!empty($imagen_producto) && $imagen_producto->isValid()) {
+                    $extension = $imagen_producto->getClientOriginalExtension();
+                    $nombre = GenerarCadenaAleatoria();
+                    $nombre_archivo = "{$nombre}.{$extension}";
+                    $imagen_producto->move($ruta_destino, $nombre_archivo);
+
+                    $imagen->ruta_imagen = "$ruta_destino$nombre_archivo";
+                }
+
+                $imagen->habilitado = $datos['habilitado'];
+                $imagen->save();
+
+                return Redirect::to("/admin/productos-imagenes/$id_producto");
+            }
+        }
+    }
+
+    public function AgregarProductoImagen(Request $request,$id_producto){
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            if ($request->method() == 'GET') {
+                return view("privado.productos-imagenes.agregar-producto-imagen", compact(['id_producto']));
+            }elseif ($request->method() == 'POST'){
+                $datos = $request->only(['habilitado']);
+
+                $imagen = new Imagenes();
+
+                $imagen_producto = $request->file('imagen_producto');
+                $ruta_destino = 'productos/';
+
+                if (!empty($imagen_producto) && $imagen_producto->isValid()) {
+                    $extension = $imagen_producto->getClientOriginalExtension();
+                    $nombre = GenerarCadenaAleatoria();
+                    $nombre_archivo = "{$nombre}.{$extension}";
+                    $imagen_producto->move($ruta_destino, $nombre_archivo);
+
+                    $imagen->ruta_imagen = "$ruta_destino$nombre_archivo";
+                }
+
+                $imagen->habilitado = $datos['habilitado'];
+                $imagen->save();
+
+                DB::table('productos_imagenes')->insert(
+                    ['id_producto' => $id_producto, 'id_imagen' => $imagen->id_imagen]
+                );
+
+                return Redirect::to("/admin/productos-imagenes/$id_producto");
+            }
+        }
+    }
+
+    public function BorrarImagen(Request $request,$id_producto,$id_imagen)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            $imagen = Imagenes::find($id_imagen);
+
+            $imagen->delete();
+
+            DB::table('productos_imagenes')->where('id_imagen',$id_imagen)->delete();
+
+            return Redirect::to("/admin/productos-imagenes/$id_producto");
+        }
+    }
+}

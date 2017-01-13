@@ -1,0 +1,86 @@
+<?php $__env->startSection('contenido'); ?>
+    <div class="general1">
+        <div class="container general2">
+
+            <div class="col-md-12 listado">
+
+                <div id="filters_tags">
+                    <?php if(!empty($texto_buscar)): ?>
+                    <div class="title">Filtros: </div>
+                    <a href="<?php echo e(route('buscar-productos')); ?>?query=">"<?php echo e($texto_buscar); ?>"</a>
+                    <br clear="all">
+                    <?php endif; ?>
+                </div>
+
+                <div class="col-md-12 mostrar">
+                    <?php /**/ $numero_registro_inicial = ($productos->perPage()*($productos->currentPage()-1))+1; /**/ ?>
+                    <?php /**/ $numero_registro_final = ($productos->perPage()*($productos->currentPage()-1))+$productos->perPage(); /**/ ?>
+                    <?php /**/ $numero_registro_final = $numero_registro_final>$productos->total()?$productos->total():$numero_registro_final; /**/ ?>
+
+                    <div class="col-md-4">
+                        Mostrando: <?php echo e($numero_registro_inicial); ?> - <?php echo e($numero_registro_final); ?> de <?php echo e($productos->total()); ?>    </div>
+                    <div class="col-md-4">
+                        Mostrar:
+                        <?php foreach($resultados_por_pagina as $cantidad): ?>
+                            <?php if($cantidad == $por_pagina): ?>
+                                <?php echo e($cantidad); ?>,
+                            <?php else: ?>
+                                <a href="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;page_size=<?php echo e($cantidad); ?>"><?php echo e($cantidad); ?></a>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="col-md-4">
+                        Ordenar por
+                        <select id="sort_on_select" class="sort_on form-control">
+                            <option value="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;sort=name_asc">Nombre ascendente</option>
+                            <option value="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;sort=name_desc">Nombre descendente</option>
+                            <option value="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;sort=newest">Novedades primero</option>
+                            <option value="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;sort=lowest_price">Precio: menor a mayor</option>
+                            <option value="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;sort=higher_price">Precio: mayor a menor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="mainList">
+                    <form action="/AR/es/products/compare" method="get" id="compare_form" target="_compare">
+                        <div class="compares_div">
+                            <a href="/AR/es/products/compare">Comparar Productos Seleccionados</a>
+                        </div>
+                        <div class="destacados">
+                            <?php foreach($productos as $producto): ?>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="<?php echo e(asset($producto->GetUrlDetalleProducto())); ?>" class="image" title="<?php echo e($producto->nombre_producto); ?>">
+                                        <img class="ímage" alt="<?php echo e($producto->nombre_producto); ?>" height="102" src="<?php echo e(asset($producto->imagenes[0]->ruta_imagen)); ?>">
+                                    </a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="<?php echo e(asset($producto->GetUrlDetalleProducto())); ?>" title="<?php echo e($producto->nombre_producto); ?>"><?php echo e($producto->nombre_producto); ?>.</a>
+                                    </h2>
+                                </div>
+
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="516" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="paginacion">
+                    <div class="col-md-6">
+                        <p>Mostrando <?php echo e($numero_registro_inicial); ?> - <?php echo e($numero_registro_final); ?> de <?php echo e($productos->total()); ?> Productos</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <?php for($pagina=1;$pagina<=$productos->lastPage();$pagina++): ?>
+                            <li><a class="selected" href="<?php echo e(route('buscar-productos')); ?>?query=<?php echo e($texto_buscar); ?>&amp;page_size=<?php echo e($por_pagina); ?>&amp;page=<?php echo e($pagina); ?>"><?php echo e($pagina); ?></a></li>
+                            <?php endfor; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

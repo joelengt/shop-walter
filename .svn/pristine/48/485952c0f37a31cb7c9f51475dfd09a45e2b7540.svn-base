@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+use App\Modelos\Categorias;
+
+class TiendaControlador extends Controller
+{
+    public function Inicio()
+    {
+        return view('publico.inicio');
+    }
+
+    public function DetalleProducto($categoria_padre,$categoria_hija = NULL,$producto = NULL)
+    {
+        
+        return view('publico.detalle-producto');
+    }
+
+    public function Categorias()
+    {
+        //$categorias = Categorias::CategoriasPrincipales()->with('subcategorias')->get()->toArray();
+        //dd($categorias);
+
+        return view('publico.categorias');
+    }
+}

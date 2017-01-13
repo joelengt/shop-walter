@@ -1,0 +1,753 @@
+<?php $__env->startSection('contenido'); ?>
+    <div class="bannerCat1">
+        <div class="container_category_banner bannerCat2">
+            <img src="<?php echo e(asset('/img/categorias/7af81f42003cfb6e7307e1a6c56d4f442160b5fa.png')); ?>">    </div>
+    </div>
+    <div class="general1">
+        <div class="container general2">
+
+            <div class="col-md-3 barraIzq" id="leftMenu">
+
+                <div class="border">
+                    <div class="title1">Categorías</div>
+                    <ul class="content categorias">
+                        <li class="">
+                            <ul>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/boligrafos?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_2');" class="selected" title="Bolígrafos">
+                                        <div class="left">
+                                            Bolígrafos                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu" id="prod_menu_2">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos/plasticos-metalicos" class="selected" title="Plásticos + Metálicos">Plásticos + Metálicos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos/plasticos" title="Plásticos">Plásticos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos/metalicos" title="Metálicos">Metálicos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos/estuches" title="Estuches">Estuches</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos/sets" title="Sets">Sets</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos/tactiles" title="Táctiles">Táctiles</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/boligrafos?subcategory_slug=plasticos-metalicos" title="Bolígrafos"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/bolsos-y-mochilas?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_5');" title="Bolsos Y Mochilas">
+                                        <div class="left">
+                                            Bolsos Y Mochilas                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_5" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/bolsos-y-mochilas/bolsos" title="Bolsos ">Bolsos </a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/bolsos-y-mochilas/maletines" title="Maletines">Maletines</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/bolsos-y-mochilas/mochilas" title="Mochilas">Mochilas</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/bolsos-y-mochilas/valijas-carry-on" title="Valijas &amp; Carry-On">Valijas &amp; Carry-On</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/bolsos-y-mochilas?subcategory_slug=plasticos-metalicos" class="selected" title="Bolsos Y Mochilas"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/hogar-tiempo-libre?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_10');" title="Hogar &amp; Tiempo Libre">
+                                        <div class="left">
+                                            Hogar &amp; Tiempo Libre                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_10" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/hogar-tiempo-libre/hogar" title="Hogar">Hogar</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/hogar-tiempo-libre/vinos" title="Vinos">Vinos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/hogar-tiempo-libre/tiempo-libre" title="Tiempo Libre">Tiempo Libre</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/hogar-tiempo-libre/herramientas" title="Herramientas">Herramientas</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/hogar-tiempo-libre?subcategory_slug=plasticos-metalicos" class="selected" title="Hogar &amp; Tiempo Libre"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/tecnologia?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_8');" title="Tecnología">
+                                        <div class="left">
+                                            Tecnología                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_8" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/tecnologia/computacion" title="Computación">Computación</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/tecnologia/otros" title="Otros">Otros</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/tecnologia?subcategory_slug=plasticos-metalicos" class="selected" title="Tecnología"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/escritorio?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_12');" title="Escritorio">
+                                        <div class="left">
+                                            Escritorio                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_12" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/escritorio/accesorios" title="Accesorios">Accesorios</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/escritorio/libreria" title="Librería">Librería</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/escritorio?subcategory_slug=plasticos-metalicos" class="selected" title="Escritorio"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/gorros?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_3');" title="Gorros">
+                                        <div class="left">
+                                            Gorros                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_3" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/gorros/gorras" title="Gorras">Gorras</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/gorros/chambergo" title="Chambergo">Chambergo</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/gorros?subcategory_slug=plasticos-metalicos" class="selected" title="Gorros"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/termicos?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_9');" title="Térmicos">
+                                        <div class="left">
+                                            Térmicos                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_9" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/termicos/coolers-2" title="Coolers">Coolers</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/termicos/jarros" title="Jarros">Jarros</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/termicos/termos" title="Termos">Termos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/termicos?subcategory_slug=plasticos-metalicos" class="selected" title="Térmicos"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/llaveros?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_7');" title="Llaveros">
+                                        <div class="left">
+                                            Llaveros                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_7" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/llaveros/todos" title="Todos">Todos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/llaveros?subcategory_slug=plasticos-metalicos" class="selected" title="Llaveros"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu">
+
+                                    <a href="/AR/es/products/paraguas?subcategory_slug=plasticos-metalicos" onclick="return prodShowSubmenu(this,'prod_menu_4');" title="Paraguas">
+                                        <div class="left">
+                                            Paraguas                          </div>
+                                        <img src="<?php echo e(asset('/img/leftMenu_subBtn2.png')); ?>" border="0">
+                                    </a>
+
+                                </li>
+                                <li class="submenu hidden" id="prod_menu_4" style="">
+                                    <ul class="next_level">
+                                        <li>
+                                            <a href="/AR/es/products/paraguas/todos-2" title="Todos">Todos</a>
+                                        </li>
+                                        <li>
+                                            <a href="/AR/es/products/paraguas?subcategory_slug=plasticos-metalicos" class="selected" title="Paraguas"><em>+ Ver todo</em></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu"><a title="Ver todas" class="" href="/AR/es/products/boligrafos/plasticos-metalicos">Ver todas</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                <div class="border">
+                    <div class="title2">Filtrar</div>
+                    <form class="form-inline" action="#">
+                        <div class="content filters">
+
+                            <div class="filtros">
+                                <p>Precio</p>
+                                <div class="form-group">
+                                    <input name="filters[price_from]" type="text" placeholder="Desde" class="form-control" value="">
+                                    <input name="filters[price_to]" type="text" placeholder="Hasta" class="form-control inputMargen" value="">
+                                </div>
+                            </div>
+
+                            <div class="filtros">
+                                <p>Color</p>
+                                <div class="form-group">
+
+
+                                    <select class="form-control" name="filters[color]">
+                                        <option selected="selected"></option>
+                                        <option value="2">
+                                            Rojo                </option>
+                                        <option value="3">
+                                            Blanco                </option>
+                                        <option value="4">
+                                            Verde                </option>
+                                        <option value="5">
+                                            Plata                </option>
+                                        <option value="6">
+                                            Marron                </option>
+                                        <option value="7">
+                                            Negro                </option>
+                                        <option value="8">
+                                            Azul Francia                </option>
+                                        <option value="9">
+                                            Amarillo                 </option>
+                                        <option value="10">
+                                            Celeste                </option>
+                                        <option value="11">
+                                            Tiza                </option>
+                                        <option value="12">
+                                            Azul Marino                </option>
+                                        <option value="13">
+                                            Gris                </option>
+                                        <option value="14">
+                                            Transparente                </option>
+                                        <option value="15">
+                                            Naranja                </option>
+                                        <option value="17">
+                                            Beige                </option>
+                                        <option value="18">
+                                            Jean                </option>
+                                        <option value="19">
+                                            Verde Militar                </option>
+                                        <option value="20">
+                                            Violeta                </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="filtros">
+                                <p>Marca</p>
+                                <div class="form-group">
+
+                                    <select class="form-control" name="filters[brand]">
+                                        <option selected="selected"></option>
+                                        <option value="2">
+                                            Ogio                </option>
+                                        <option value="3">
+                                            Kingtech                </option>
+                                        <option value="4">
+                                            Lumilite                </option>
+                                        <option value="5">
+                                            Benevento                </option>
+                                        <option value="6">
+                                            Dunlop                </option>
+                                        <option value="7">
+                                            Pampa Spirit                </option>
+                                        <option value="8">
+                                            Suns Tools                </option>
+                                        <option value="11">
+                                            The Daily Book                </option>
+                                        <option value="14">
+                                            Swissbags                </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="filtros">
+                                <p>Tipo</p>
+                                <div class="form-group">
+
+
+                                    <select class="form-control" name="filters[attribute]">
+                                        <option selected="selected"></option>
+                                        <option value="">
+                                            Promociones              </option>
+                                        <option value="">
+                                            Entrega Speed               </option>
+                                        <option value="">
+                                            Novedades              </option>
+                                        <option value="2">
+                                            Grip              </option>
+                                        <option value="3">
+                                            Cartucho de tinta              </option>
+                                        <option value="4">
+                                            Roller              </option>
+                                        <option value="5">
+                                            Touch              </option>
+                                        <option value="6">
+                                            Trazo 1mm              </option>
+                                        <option value="7">
+                                            Twist              </option>
+                                        <option value="8">
+                                            Pulsador              </option>
+                                        <option value="9">
+                                            Eco              </option>
+                                        <option value="10">
+                                            Trazo 0,8mm              </option>
+                                        <option value="11">
+                                            5 gajos              </option>
+                                        <option value="12">
+                                            6 Gajos              </option>
+                                        <option value="13">
+                                            Hebilla Metálica              </option>
+                                        <option value="14">
+                                            Sist. Ajustable              </option>
+                                        <option value="15">
+                                            Dry Fit              </option>
+                                        <option value="16">
+                                            Velcro              </option>
+                                        <option value="20">
+                                            Térmico              </option>
+                                        <option value="21">
+                                            Bamboo              </option>
+                                        <option value="22">
+                                            INAL              </option>
+                                        <option value="23">
+                                            Metal              </option>
+                                        <option value="24">
+                                            Cuero              </option>
+                                        <option value="25">
+                                            Destapador              </option>
+                                        <option value="26">
+                                            Extensible              </option>
+                                        <option value="28">
+                                            Organizador              </option>
+                                        <option value="30">
+                                            Red Interna              </option>
+                                        <option value="32">
+                                            Correa Antideslizante              </option>
+                                        <option value="33">
+                                            refuerzo              </option>
+                                        <option value="35">
+                                            Espalda Ventilación              </option>
+                                        <option value="36">
+                                            Espalda Acolchada              </option>
+                                        <option value="38">
+                                            Hang Grip              </option>
+                                        <option value="40">
+                                            Cierre Grip              </option>
+                                        <option value="43">
+                                            Portalaptop              </option>
+                                        <option value="48">
+                                            Mango Curvo              </option>
+                                        <option value="49">
+                                            Mango de Goma              </option>
+                                        <option value="51">
+                                            No Wind              </option>
+                                        <option value="52">
+                                            Pulsador              </option>
+                                        <option value="53">
+                                            USB              </option>
+                                        <option value="54">
+                                            Iphone              </option>
+                                        <option value="55">
+                                            IPad              </option>
+                                        <option value="56">
+                                            Recargable              </option>
+                                        <option value="57">
+                                            110 - 220              </option>
+                                        <option value="58">
+                                            Mini USB              </option>
+                                        <option value="63">
+                                            Andriod              </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="filtros" style="border:none;">
+                                <button type="submit" class="btn btn-default">Aplicar filtro</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-9 listado">
+
+                <div id="filters_tags">
+                </div>
+
+                <div class="col-md-12 mostrar">
+                    <div class="col-md-4">
+                        Mostrando: 1 - 16 de 23    </div>
+                    <div class="col-md-4">
+                        Mostrar:      16, <a href="/AR/es/products/boligrafos/plasticos-metalicos?page_size=32">32</a>, <a href="/AR/es/products/boligrafos/plasticos-metalicos?page_size=23">Todos</a>.
+                    </div>
+                    <div class="col-md-4">
+                        Ordenar por        <select id="sort_on_select" class="sort_on form-control">
+                            <option value="/AR/es/products/boligrafos/plasticos-metalicos?sort=name_asc">Nombre ascendente</option>
+                            <option value="/AR/es/products/boligrafos/plasticos-metalicos?sort=name_desc">Nombre descendente</option>
+                            <option value="/AR/es/products/boligrafos/plasticos-metalicos?sort=newest" selected="selected">Novedades primero</option>
+                            <option value="/AR/es/products/boligrafos/plasticos-metalicos?sort=lowest_price">Precio: menor a mayor</option>
+                            <option value="/AR/es/products/boligrafos/plasticos-metalicos?sort=higher_price">Precio: mayor a menor</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div id="mainList">
+                    <form action="/AR/es/products/compare" method="get" id="compare_form" target="_compare">
+                        <div class="compares_div">
+                            <a href="/AR/es/products/compare">Comparar Productos Seleccionados</a>
+                        </div>
+                        <div class="destacados">
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/stark" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Stark" height="102" src="<?php echo e(asset('/img/products/37d27ff5194eca81d1cf7efc9a17a4e298f2d568.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/stark" title="Stark">Stark</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="446" name="compares[]" id="compares_446">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="446" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/curve-snow" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Curve Snow" height="102" src="<?php echo e(asset('/img/products/581a3f1085c51b3ecdbd6f00813a23a1166c82ff.png')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/curve-snow" title="Curve Snow">Curve Snow</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="447" name="compares[]" id="compares_447">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="447" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/tyrell" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Tyrell" height="102" src="<?php echo e(asset('/img/products/958b7bfc32b00ad41edfd89d43ec77128bdc679c.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/tyrell" title="Tyrell">Tyrell</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="448" name="compares[]" id="compares_448">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="448" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/skinny" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Skinny" height="102" src="<?php echo e(asset('/img/products/e91462b7f7675904ce5ea530ae04f6a37831686f.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/skinny" title="Skinny">Skinny</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="449" name="compares[]" id="compares_449">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="449" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/zebra" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Zebra" height="102" src="<?php echo e(asset('/img/products/291f8bb0de8b1f9c76531d3acf8d53bd9c113265.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/zebra" title="Zebra">Zebra</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="369" name="compares[]" id="compares_369">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="369" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/resort" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Resort" height="102" src="<?php echo e(asset('/img/products/6a3af4d793d394b8de874dac0268656a55e0984d.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/resort" title="Resort">Resort</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="281" name="compares[]" id="compares_281">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="281" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/retro" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Retro" height="102" src="<?php echo e(asset('/img/products/a51aacbe5863c02d6294f4b916b013842b4af514.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/retro" title="Retro">Retro</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="282" name="compares[]" id="compares_282">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="282" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/ring" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Ring" height="102" src="<?php echo e(asset('/img/products/4bbb25709f9703ccb9df4946ad26ccf08fb499d2.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/ring" title="Ring">Ring</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="283" name="compares[]" id="compares_283">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="283" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/silicon-ball-pen" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Silicon Ball Pen" height="102" src="<?php echo e(asset('/img/products/0036e8547192ce1d1fb6b1f81afcc1dd7c00f880.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/silicon-ball-pen" title="Silicon Ball Pen">Silicon Ball Pen</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="326" name="compares[]" id="compares_326">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="326" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/new-kiko" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="New Kiko" height="102" src="<?php echo e(asset('/img/products/5e2091ffa19b5f84f85d0180a7f8fdf2c9940c02.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/new-kiko" title="New Kiko">New Kiko</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="234" name="compares[]" id="compares_234">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="234" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/mambo-new-frosty" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Mambo New Frosty" height="102" src="<?php echo e(asset('/img/products/8a5038f0efcc38b6075a038082648e4b737aa453.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/mambo-new-frosty" title="Mambo New Frosty">Mambo New Frosty</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="237" name="compares[]" id="compares_237">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="237" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/bl-6" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="BL 6" height="102" src="<?php echo e(asset('/img/products/174e45c2385942426059311aaa754b28b19cb5fb.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/bl-6" title="BL 6">BL 6</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="253" name="compares[]" id="compares_253">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="253" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/pegasus" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Pegasus" height="102" src="<?php echo e(asset('/img/products/21901843c50a73ee8b07ab4f3ef2660b364bb847.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/pegasus" title="Pegasus">Pegasus</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="254" name="compares[]" id="compares_254">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="254" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/fire" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Fire" height="102" src="<?php echo e(asset('/img/products/41d6bcb10ed25035884cddaa99bb627465bb4ad6.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/fire" title="Fire">Fire</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="112" name="compares[]" id="compares_112">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="112" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/franny-frost" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Franny Frost" height="102" src="<?php echo e(asset('/img/products/3aa64277494a4d1c97416f4d605e9e6d6eac3df4.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/franny-frost" title="Franny Frost">Franny Frost</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="114" name="compares[]" id="compares_114">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="114" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                            <div class="destacado">
+                                <div class="img">
+                                    <a href="/AR/es/products/boligrafos/plasticos-metalicos/franny-xxi" class="image" title="Boligrafo con cuerpo solid. Retráctil. Trazo 1.0 mm. Cartucho Tipo Parker"><img class="ímage" alt="Franny XXI" height="102" src="<?php echo e(asset('/img/products/7b1f918809ad1f0c79aecf130cd2a94ca63e881e.jpg')); ?>"></a>
+                                </div>
+                                <div class="title">
+                                    <h2>
+                                        <a class="name" href="/AR/es/products/boligrafos/plasticos-metalicos/franny-xxi" title="Franny XXI">Franny XXI</a>
+                                    </h2>
+                                </div>
+                                <div class="compare">
+                                    <label>
+                                        <input type="checkbox" class="compares_products" value="115" name="compares[]" id="compares_115">
+                                        Comparar producto            </label>
+                                </div>
+                                <a class="add_to_cart_link boton" href="http://www.zecat.com.ar/AR/es/user_quotations/add_item" rel="115" title="Pedir cotización">Pedir cotización</a>
+                            </div>
+                        </div>
+                        <div class="compares_div">
+                            <a href="/AR/es/products/compare">Comparar Productos Seleccionados</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="paginacion">
+
+                    <div class="col-md-6">
+                        <p>Mostrando 1 - 16 de 23 Productos</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li><a class="selected" href="/AR/es/products/boligrafos/plasticos-metalicos?page_size=16&amp;page=1">1</a></li>
+                            <li><a class="" href="/AR/es/products/boligrafos/plasticos-metalicos?page_size=16&amp;page=2">2</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('publico.plantilla-principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

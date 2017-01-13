@@ -1,0 +1,4 @@
+<?php
+    return [
+        'paginador_productos' => ['12','24','Todo'],
+    ];

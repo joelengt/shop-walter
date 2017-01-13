@@ -1,0 +1,135 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Modelos\Carruseles;
+use App\Modelos\Productos;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+use \Auth;
+use \Redirect;
+use \DB;
+
+class CarruselesControlador extends Controller
+{
+
+    /**
+     * Carga el reporte con los carruseles registrados.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function Carruseles()
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else{
+            $carruseles = Carruseles::paginate();
+
+            return view('privado.carruseles.lista-carruseles',compact(['carruseles']));
+        }
+    }
+
+    public function BorrarCarrusel(Request $request,$id_carrusel)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else{
+            $carrusel = Carruseles::find($id_carrusel);
+
+            DB::table('productos_carruseles')->where('id_carrusel', $id_carrusel)->delete();
+
+            $carrusel->delete();
+
+            return Redirect::to('admin/carruseles');
+        }
+    }
+
+
+
+    /**
+     * Cargar el formulario para modificar un carrusel.
+     *
+     * @param Request $request
+     * @param integer $id_carrusel Codigo de carrusel a modificar.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function EditarCarrusel(Request $request,$id_carrusel)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else{
+            if ($request->method() == 'GET') {
+                $carrusel = Carruseles::find($id_carrusel);
+                $productos = Productos::all();
+
+                return view('privado.carruseles.editar-carrusel',compact(['carrusel','productos']));
+            }elseif ($request->method() == 'POST'){
+                $datos = $request->only(['nombre_carrusel','nombre_corto','id_producto','orden','habilitado']);
+
+                /* Limpiar y asignar productos */
+                $datos_insertar = [];
+
+                if (!empty($datos['id_producto']))
+                    foreach ($datos['id_producto'] as $producto) {
+                        $datos_insertar[] = ['id_carrusel' => $id_carrusel, 'id_producto' => $producto];
+                    }
+
+                DB::table('productos_carruseles')->where('id_carrusel', $id_carrusel)->delete();
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_carruseles')->insert($datos_insertar);
+                /* fin de limpieza y asignacion */
+
+                $carrusel = Carruseles::find($id_carrusel);
+
+                $carrusel->nombre_carrusel = $datos['nombre_carrusel'];
+                $carrusel->nombre_corto = $datos['nombre_corto'];
+                $carrusel->orden = $datos['orden'];
+                $carrusel->habilitado = $datos['habilitado'];
+
+                $carrusel->save();
+
+                return Redirect::to('admin/carruseles');
+            }
+
+        }
+    }
+
+    public function AgregarCarrusel(Request $request)
+    {
+        if(!Auth::check()) {
+            return Redirect::to('/admin/login');
+        }else {
+            if ($request->method() == 'GET') {
+                $productos = Productos::all();
+
+                return view('privado.carruseles.agregar-carrusel',compact(['productos']));
+            }elseif ($request->method() == 'POST'){
+                $datos = $request->only(['nombre_carrusel','nombre_corto','id_producto','orden','habilitado']);
+
+                $carrusel = new Carruseles();
+
+                $carrusel->nombre_carrusel = $datos['nombre_carrusel'];
+                $carrusel->nombre_corto = $datos['nombre_corto'];
+                $carrusel->orden = $datos['orden'];
+                $carrusel->habilitado = $datos['habilitado'];
+
+                $carrusel->save();
+
+                $datos_insertar = [];
+
+                if (!empty($datos['id_producto']))
+                    foreach ($datos['id_producto'] as $producto) {
+                        $datos_insertar[] = ['id_carrusel' => $carrusel->id_carrusel, 'id_producto' => $producto];
+                    }
+
+                if (!empty($datos_insertar))
+                    DB::table('productos_carruseles')->insert($datos_insertar);
+
+                return Redirect::to('admin/carruseles');
+            }
+        }
+    }
+}
