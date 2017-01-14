@@ -3,18 +3,18 @@
 <head>
     @inject('configuraciones', 'App\Modelos\Configuraciones')
     <?php
-//      $config = [];
-        $config = [
-            'head_title' => 'Tienda Walter',
-            'head_description' => 'Una Tienda para toda la familia',
-            'head_keywords' => 'a, b, c, d',
-            'url_facebook' => 'https://facebook.com'
-        ];
-//        $configuraciones = $configuraciones->get();
-//        foreach ($configuraciones as $configuracion){
-//            $config[$configuracion->llave] = $configuracion->valor;
-//        }
-//        dd($config);
+     $config = [];
+        // $config = [
+        //     'head_title' => 'Tienda Walter',
+        //     'head_description' => 'Una Tienda para toda la familia',
+        //     'head_keywords' => 'a, b, c, d',
+        //     'url_facebook' => 'https://facebook.com'
+        // ];
+       $configuraciones = $configuraciones->get();
+       foreach ($configuraciones as $configuracion){
+           $config[$configuracion->llave] = $configuracion->valor;
+       }
+       // dd($config);
     ?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
